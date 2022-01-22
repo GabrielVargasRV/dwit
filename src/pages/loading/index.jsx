@@ -4,8 +4,6 @@ import {
     Content,
     LoadingContainer
 } from './styles'
-import Header from '../../components/header';
-
 
 const Loading = () => {
     return (

@@ -6,7 +6,6 @@ import {
     Info,
     ContinueBtn
 } from './styles'
-import Header from '../../components/header';
 import Context from '../../context/Context';
 import Product from '../../components/checkoutItem/index';
 import EmptyCart from '../emptyCart/index'

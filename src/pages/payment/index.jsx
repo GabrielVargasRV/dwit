@@ -1,5 +1,4 @@
 import React,{useContext,useEffect,useState} from 'react';
-import Header from '../../components/header/index'
 import {
     Container,
     Content,

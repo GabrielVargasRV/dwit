@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import {
+    Container,
+    Content,
+    Oders,
+    Profile,
+    ProfilePhoto,
+    Name,
+    SignoutBtn,
+    AdminBtn
+} from './styles'
+import Context from '../../context/Context'
+import OrderSummaty from '../../components/orderSummary/index'
+import {useNavigate} from 'react-router-dom'
 
 const Account = () => {
-    return(
-        <div>
-            <p>Account</p>
-        </div>
+    const navigate = useNavigate()
+    const [orders, setOrders] = useState([])
+    const { user,logout } = useContext(Context)
+
+
+    return (
+        <Container>
+            <Content>
+                <Oders>
+                    {orders.length ? (
+                        orders.map((order) => {
+
+                        })
+                    ) : (
+                        <h2>No Orders</h2>
+                    )}
+                </Oders>
+                <Profile>
+                    <ProfilePhoto src={user.photo} />
+                    <Name>{user.name}</Name>
+                    <SignoutBtn onClick={() => logout()} >Sign out</SignoutBtn>
+                    {user.isAdmin ? (<AdminBtn onClick={() => navigate('/admin')} >Admin</AdminBtn>) : (<></>)}
+                    <h3>Current cart:</h3>
+                    <OrderSummaty/>
+                </Profile>
+            </Content>
+        </Container>
     )
 }
 

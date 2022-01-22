@@ -5,7 +5,6 @@ import {
     ShoppingCart,
     GoHome
 } from './styles'
-import Header from '../../components/header/index'
 import {useNavigate} from 'react-router-dom'
 
 const EmptyCart = () => {

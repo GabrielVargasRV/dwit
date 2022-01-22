@@ -4,7 +4,6 @@ import {
     Products
 } from './styles'
 import Product from '../../components/product/index'
-import Header from '../../components/header/index'
 import { useParams } from 'react-router-dom'
 import { useGetProductsByCategory } from '../../hooks/useGetProductsByCategory'
 import LoadingPage from '../loading/index'

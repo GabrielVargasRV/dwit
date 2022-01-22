@@ -7,7 +7,6 @@ import {
     ContinueBtn,
     GoBackBtn
 } from './styles'
-import Header from '../../components/header/index'
 import Context from '../../context/Context'
 import {useNavigate} from 'react-router-dom'
 
