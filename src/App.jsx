@@ -8,7 +8,9 @@ import Loading from './pages/loading/index'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/header/index'
-import Context from './context/Context'
+import ModalContainer from './components/modalContainer/index'
+import ModalContext from './context/modalState/Context'
+import UserContext from './context/userState/Context'
 const Home = React.lazy(() => import('./pages/home'))
 const Product = React.lazy(() => import('./pages/product/index'))
 const Checkout = React.lazy(() => import('./pages/checkout/index'))
@@ -20,10 +22,12 @@ const Signup = React.lazy(() => import('./pages/signup/index'))
 const Admin = React.lazy(() => import('./pages/admin/index'))
 
 const App = () => {
-  const { isLogged } = useContext(Context)
+  const { isLogged } = useContext(UserContext)
+  const {modal} = useContext(ModalContext)
 
   return (
     <BrowserRouter>
+      <ModalContainer element={modal} />
       <Header />
       <Routes>
         <Route exact path="/" element={

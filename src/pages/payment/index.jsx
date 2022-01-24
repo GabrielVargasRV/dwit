@@ -6,13 +6,13 @@ import {
     Info,
     GoBackBtn
 } from './styles'
-import Context from '../../context/Context'
+import CartContext from '../../context/cartState/Context'
 import Product from '../../components/checkoutItem/index'
 import { useNavigate } from 'react-router-dom';
 import {PayPalButton} from 'react-paypal-button-v2'
 
 const Payment = () => {
-    const {cart,cartFullInfo,subTotal,buyer} = useContext(Context)
+    const {cart,cartFullInfo,subTotal,buyer} = useContext(CartContext)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Payment = () => {
                         </p>
                     ))}
                     <PayPalButton
-                        amount={subTotal}
+                        amount={0}
                     />
                     <GoBackBtn to="/checkout/information" >Go Back</GoBackBtn>
                 </Info>

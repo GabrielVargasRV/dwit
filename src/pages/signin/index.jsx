@@ -6,14 +6,14 @@ import {
     SigninWithEmail,
     SigninWithEmailInput,
     SigninWithEmailBtn,
-    SigninWithGoogleRegisterBtn
+    SigninWithEmailRegisterBtn
 } from './styles'
 import { googleAuthProvider, auth } from '../../firebase/index'
-import Context from '../../context/Context'
+import UserContext from '../../context/userState/Context'
 import { toast } from 'react-toastify'
 
 const Signin = () => {
-    const { login } = useContext(Context)
+    const { login } = useContext(UserContext)
 
     const handleSigninWithGoogle = async () => {
         await auth.signInWithPopup(googleAuthProvider).then((success) => {
@@ -65,7 +65,7 @@ const Signin = () => {
                     <SigninWithEmailInput type="email" placeholder="Email" name="email" required />
                     <SigninWithEmailInput type="password" placeholder="Password" name="password" required />
                     <SigninWithEmailBtn type="submit" >Sign in</SigninWithEmailBtn>
-                    <SigninWithGoogleRegisterBtn to="/register" >Don't have an account? <strong> register</strong></SigninWithGoogleRegisterBtn>
+                    <SigninWithEmailRegisterBtn to="/register" >Don't have an account? <strong> register</strong></SigninWithEmailRegisterBtn>
                 </SigninWithEmail>
             </SigninBox>
         </Container>

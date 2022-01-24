@@ -9,14 +9,14 @@ import {
     SignoutBtn,
     AdminBtn
 } from './styles'
-import Context from '../../context/Context'
+import UserContext from '../../context/userState/Context'
 import OrderSummaty from '../../components/orderSummary/index'
 import {useNavigate} from 'react-router-dom'
 
 const Account = () => {
     const navigate = useNavigate()
     const [orders, setOrders] = useState([])
-    const { user,logout } = useContext(Context)
+    const { user,logout } = useContext(UserContext)
 
 
     return (

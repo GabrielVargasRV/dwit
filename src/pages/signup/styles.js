@@ -74,3 +74,20 @@ export const SubmitBtn = styled.button`
     cursor: pointer;
 `
 
+export const AlreadyHaveAnAccountBtn = styled.button`
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-style: none;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    & strong{
+        text-decoration: none;
+        color: #339AF0;
+        margin-left: 5px;
+    }
+`

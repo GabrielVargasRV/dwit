@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from 'react'
 import LoadingSpinner from '../../components/loadingSpinner/index'
 import { useNavigate } from 'react-router-dom'
+import {db} from '../../firebase/index'
 
 export const Container = styled.div`
     width: 100%;
@@ -117,6 +118,12 @@ const ProductItem = ({ data }) => {
     const navigate = useNavigate()
     const [deleting, setDeleting] = useState(false)
 
+    const deleteItem = async () => {
+        setDeleting(true)
+        await db.collection('items').doc(data.id).delete()
+        setDeleting(false)
+    }
+
     return (
         <Container>
             <Photo bg={data.image} ></Photo>
@@ -141,7 +148,7 @@ const ProductItem = ({ data }) => {
                     <EditBtn onClick={() => navigate(`/admin/${data.id}`)} >
                         Edit
                     </EditBtn>
-                    <RemoveBtn>
+                    <RemoveBtn onClick={deleteItem} >
                         {deleting ? (
                             <LoadingSpinner />
                         ) : (

@@ -7,7 +7,7 @@ import {
     SubmitBtn,
     Password
 } from './styles'
-import Context from '../../context/Context'
+import UserContext from '../../context/userState/Context'
 import { toast } from 'react-toastify'
 import { auth } from '../../firebase';
 import {useNavigate} from 'react-router-dom'
@@ -17,7 +17,7 @@ const AVATAR_DEFAULT_PHOTO = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/bla
 
 const Signup = () => {
     const navigate = useNavigate()
-    const { logup } = useContext(Context)
+    const { logup } = useContext(UserContext)
     const [viewPassword, setViewPassword] = useState(false)
 
     const handleOnSubmit = (e) => {

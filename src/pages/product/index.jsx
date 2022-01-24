@@ -18,7 +18,7 @@ import { useParams } from 'react-router-dom'
 import { useGetProductById } from '../../hooks/useGetProductById'
 import { useGetProductsByCategory } from '../../hooks/useGetProductsByCategory'
 import ReletedProduct from '../../components/product/index'
-import Context from '../../context/Context';
+import CartContext from '../../context/cartState/Context';
 import LoadingPage from '../loading/index'
 import { toast } from 'react-toastify'
 import Notification from '../../components/notification/index'
@@ -32,7 +32,7 @@ const Product = () => {
     const [addingToCart, setAddingToCart] = useState(false)
     const [activeSize, setActiveSize] = useState(0)
     const [related, setRelated] = useState([])
-    const { addProductToCart } = useContext(Context)
+    const { addProductToCart } = useContext(CartContext)
 
     useEffect(() => {
         setActiveSize(0)

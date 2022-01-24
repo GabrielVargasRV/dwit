@@ -7,11 +7,11 @@ import {
     ContinueBtn,
     GoBackBtn
 } from './styles'
-import Context from '../../context/Context'
+import CartContext from '../../context/cartState/Context'
 import {useNavigate} from 'react-router-dom'
 
 const Information = () => {
-    const {cartFullInfo,subTotal,setBuyer} = useContext(Context)
+    const {cartFullInfo,subTotal,setBuyer} = useContext(CartContext)
     const navigate = useNavigate()
 
     const handleOnSubmit = (e) => {

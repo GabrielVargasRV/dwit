@@ -6,13 +6,13 @@ import {
     Info,
     ContinueBtn
 } from './styles'
-import Context from '../../context/Context';
+import CartContext from '../../context/cartState/Context';
 import Product from '../../components/checkoutItem/index';
 import EmptyCart from '../emptyCart/index'
 import OrderSummary from '../../components/orderSummary/index'
 
 const Checkout = () => {
-    const { cart } = useContext(Context)
+    const { cart } = useContext(CartContext)
 
     if(!cart.length) return <EmptyCart/>
 

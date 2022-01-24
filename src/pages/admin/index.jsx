@@ -12,11 +12,13 @@ import {
     AddSize,
     SaveBtn
 } from './styles'
-import Context from '../../context/Context'
+import UserContext from '../../context/userState/Context'
 import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../../firebase/index'
 import ProductItem from './ProductItem.jsx'
 import {useGetProductById} from '../../hooks/useGetProductById'
+
+let unSub = null
 
 const Admin = () => {
     const productInitialState = {
@@ -28,7 +30,7 @@ const Admin = () => {
     }
     const navigate = useNavigate()
     const { id } = useParams()
-    const { user } = useContext(Context)
+    const { user } = useContext(UserContext)
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState(productInitialState)
     const [categoryText, setCategoryText] = useState('')
@@ -103,13 +105,13 @@ const Admin = () => {
             if(id){
                 useGetProductById(id,(res) => setProduct({...res}))
             }
-            db.collection('items').onSnapshot((snapshot) => {
+            unSub = db.collection('items').onSnapshot((snapshot) => {
                 const arr = []
                 snapshot.docs.forEach((doc) => arr.push({id:doc.id,...doc.data()}))
                 setProducts([...arr])
-                console.log(arr)
             })
         }
+        return () => unSub && unSub()
     }, [id])
 
     return (

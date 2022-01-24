@@ -65,7 +65,7 @@ export const SigninWithEmailBtn = styled.button`
     cursor: pointer;
 `
 
-export const SigninWithGoogleRegisterBtn = styled(Link)`
+export const SigninWithEmailRegisterBtn = styled(Link)`
     width: 100%;
     height: 40px;
     display: flex;

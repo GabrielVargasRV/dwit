@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {
     Container
 } from './styles'
 
-const ModalContainer = ({children}) => {
+const ModalContainer = ({element}) => {
 
     return(
-        <Container>
-
+        <Container element={element} >
+            {element &&element}
         </Container>
     )
 }

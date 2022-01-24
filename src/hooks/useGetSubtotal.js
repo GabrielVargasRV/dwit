@@ -9,6 +9,7 @@ export const useGetSubtotal = async (cart,callback) => {
             const res = await useGetProductById(cart[i].id)
             if (res) {
                 let price = res.sizes.filter(e => e.size === cart[i].size)[0].price
+                price = parseInt(price)
                 sum += price
                 products.push({
                     ...res,

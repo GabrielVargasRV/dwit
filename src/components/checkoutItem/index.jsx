@@ -24,7 +24,7 @@ import {
 } from './loadingStyles'
 
 import { useGetProductById } from '../../hooks/useGetProductById';
-import Context from '../../context/Context'
+import CartContext from '../../context/cartState/Context'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import Notification from '../notification/index'
@@ -56,7 +56,7 @@ const CheckoutItem = (props) => {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [removing, setRemoving] = useState(false)
-    const { removeProductFromCart } = useContext(Context)
+    const { removeProductFromCart } = useContext(CartContext)
 
     const handleRemoveProductFromCart = () => {
         setRemoving(true)

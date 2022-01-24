@@ -12,11 +12,11 @@ import {
     Product
 } from './styles'
 import { Link } from 'react-router-dom'
-import Context from '../../context/Context'
+import CartContext from '../../context/cartState/Context'
 import { useGetProductByTitle } from '../../hooks/useGetProductByTitle'
 
 const Header = () => {
-    const { cart } = useContext(Context)
+    const { cart } = useContext(CartContext)
     const [search, setSearch] = useState('')
     const [searchData, setSearchData] = useState([])
     const [inputFocus, setInputFocus] = useState(false)
