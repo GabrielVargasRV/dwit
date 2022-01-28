@@ -9,7 +9,7 @@ import {
     Step,
     StepBar,
     StepBtn,
-    Image
+    Image,
 } from './styles'
 import ModalContext from '../../../context/modalState/Context'
 import PaypalButtonImg from '../../../assets/paypal-button-advise.jpg'
@@ -49,7 +49,7 @@ const Welcome = () => {
         <Container>
             <Header>
                 <h2>Welcome!</h2>
-                <CloseBtn onClick={closeModal} >
+                <CloseBtn onClick={() => closeModal()} >
                     <i className="fas fa-times"></i>
                 </CloseBtn>
             </Header>

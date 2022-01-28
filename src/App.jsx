@@ -23,7 +23,7 @@ const Admin = React.lazy(() => import('./pages/admin/index'))
 
 const App = () => {
   const { isLogged } = useContext(UserContext)
-  const {modal} = useContext(ModalContext)
+  const { modal } = useContext(ModalContext)
 
   return (
     <BrowserRouter>
@@ -31,6 +31,11 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={
+          <React.Suspense fallback={<Loading />} >
+            <Home />
+          </React.Suspense>
+        } />
+        <Route exact path="/category/:category" element={
           <React.Suspense fallback={<Loading />} >
             <Home />
           </React.Suspense>

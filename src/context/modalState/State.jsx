@@ -12,8 +12,9 @@ const State = (props) => {
         setState({modal: modal})
     }
 
-    const closeModal = () => {
+    const closeModal = (callback) => {
         setState({modal:null})
+        if(callback) callback()
     }
  
     return (

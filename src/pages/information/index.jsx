@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
     Container,
     Content,
@@ -8,10 +8,15 @@ import {
     GoBackBtn
 } from './styles'
 import CartContext from '../../context/cartState/Context'
+import UserContext from '../../context/userState/Context'
+import ModalContext from '../../context/modalState/Context'
 import {useNavigate} from 'react-router-dom'
+import SigninModal from '../../components/modals/signin/index'
 
 const Information = () => {
     const {cartFullInfo,subTotal,setBuyer} = useContext(CartContext)
+    const {isLogged} = useContext(UserContext)
+    const {setModal} = useContext(ModalContext)
     const navigate = useNavigate()
 
     const handleOnSubmit = (e) => {
@@ -26,8 +31,13 @@ const Information = () => {
             cp: e.target.cp.value,
             phone: e.target.phone.value
         })
+        if(!isLogged) return setModal(<SigninModal/>)
         navigate('/checkout/payment')
     }
+
+    useEffect(() => {
+        if(!isLogged) setModal(<SigninModal/>)
+    },[])
 
     return (
         <Container>

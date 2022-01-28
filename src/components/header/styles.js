@@ -7,7 +7,6 @@ export const Container = styled.div`
     display: grid;
     grid-template-rows: 70% 30%;
     grid-area: header;
-    margin-bottom: 20px;
 `
 
 export const Top = styled.div`
@@ -28,8 +27,17 @@ export const Bottom = styled.div`
     justify-content: space-evenly;
     align-items: center;
     background-color: #202020;
-    padding: 10px;
     color: #fff;
+    padding: 10px;
+
+    & button{
+        border-style: none;
+        width: 100px;
+        height: 100%;
+        color: #ffffff;
+        background-color: #202020;
+        cursor: pointer;
+    }
 `
 
 export const Logo = styled.h1`

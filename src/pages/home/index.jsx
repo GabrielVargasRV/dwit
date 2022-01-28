@@ -20,7 +20,7 @@ const Home = () => {
                 setLoading(false)
             }
         })
-    }, [])
+    }, [category])
 
     if(loading) return <LoadingPage/>
 

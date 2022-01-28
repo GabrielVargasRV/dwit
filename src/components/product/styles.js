@@ -10,13 +10,11 @@ export const Container = styled(Link)`
     margin-top: 20px;
     cursor: pointer;
     text-decoration: none;
+    border: 1px solid #c1c1c1;
     &:hover{
         opacity: 0.8;
     }
 `
-// export const Cover = styled.div`
-
-// `
 
 export const Image = styled.div`
     width: 100%;

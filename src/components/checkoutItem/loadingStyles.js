@@ -6,18 +6,19 @@ export const ContainerLoading = styled.div`
     display: grid;
     grid-template-columns: 200px auto;
     grid-gap: 10px;
-    background-color:#f9f9f9;
+    background-color:#ffffff;
     border-radius: 5px;
     margin-bottom: 15px;
     padding: 5px;
-    box-shadow: 0px 0px 8px -3px rgba(0,0,0,0.22);
+    border: 1px solid #ececec;
+    /* box-shadow: 0px 0px 8px -3px rgba(0,0,0,0.22); */
 `
 
 export const PhotoLoading = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background: #c7c7c7;
+    background: #ececec;
 `
 
 export const InfoLoading = styled.div`
@@ -27,7 +28,7 @@ export const InfoLoading = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #f9f9f9;
+    background: #ffffff;
 `
 
 export const TopLoading = styled.div``
@@ -41,24 +42,24 @@ export const BottomLoading = styled.div`
 export const TitleLoading = styled.div`
     height: 20px;
     width: 150px;
-    background-color: #c7c7c7;
+    background-color: #ececec;
     margin-bottom: 5px;
 `
 
 export const SizeLoading = styled.div`
     height: 20px;
     width: 50px;
-    background-color: #c7c7c7;
+    background-color: #ececec;
 `
 
 export const PriceLoading = styled.div`
     height: 20px;
     width: 70px;
-    background-color: #c7c7c7;
+    background-color: #ececec;
 `
 
 export const RemoveBtnLoading = styled.div`
     height: 50px;
     width: 120px;
-    background-color: #c7c7c7;
+    background-color: #ececec;
 `

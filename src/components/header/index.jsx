@@ -11,11 +11,12 @@ import {
     ShoppingCart,
     Product
 } from './styles'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import CartContext from '../../context/cartState/Context'
 import { useGetProductByTitle } from '../../hooks/useGetProductByTitle'
 
 const Header = () => {
+    const navigate = useNavigate()
     const { cart } = useContext(CartContext)
     const [search, setSearch] = useState('')
     const [searchData, setSearchData] = useState([])
@@ -67,15 +68,15 @@ const Header = () => {
                     </ShoppingCart>
                 </Checkout>
                 <Checkout to="/account" >
-                    <p>Login</p>
+                    <p>Account</p>
                     <ShoppingCart className="fas fa-user">
                     </ShoppingCart>
                 </Checkout>
             </Top>
             <Bottom>
-                <p>Male</p>
-                <p>Famela</p>
-                <p>Kids</p>
+                <button onClick={() => navigate('/category/men')} >Man</button>
+                <button onClick={() => navigate('/category/women')} >Woman</button>
+                <button onClick={() => navigate('/category/kids')} >Kids</button>
             </Bottom>
         </Container>
     )

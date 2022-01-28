@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 100%;
     height: calc(100vh - 120px);
+    background-color: #F5F7FA;
+    padding-top: 20px;
 `
 
 export const Content = styled.div`
@@ -15,13 +17,17 @@ export const Content = styled.div`
     grid-gap: 10px;
 `
 
-export const Oders = styled.div``
+export const Oders = styled.div`
+`
 
 export const Profile = styled.div`
     width:100%;
     display:flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #c1c1c1;
+    padding: 10px;
 `
 
 export const ProfilePhoto = styled.img`
@@ -62,4 +68,17 @@ export const AdminBtn = styled.button`
     cursor: pointer;
     margin: 10px 0px;
     border: 2px solid #000000;
+`
+export const AvaliableMoney = styled.div`
+    width: 100%;
+    padding: 10px;
+
+    & p{
+        color: #505050;
+    }
+
+    & h3{
+        color: #69B63D;
+        font-size: 24px;
+    }
 `

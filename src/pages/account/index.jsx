@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
     Container,
     Content,
@@ -7,16 +7,18 @@ import {
     ProfilePhoto,
     Name,
     SignoutBtn,
-    AdminBtn
+    AdminBtn,
+    AvaliableMoney
 } from './styles'
 import UserContext from '../../context/userState/Context'
-import OrderSummaty from '../../components/orderSummary/index'
-import {useNavigate} from 'react-router-dom'
+import CartContext from '../../context/cartState/Context'
+import { useNavigate } from 'react-router-dom'
+import OrderItem from '../../components/orderItem/index'
 
 const Account = () => {
     const navigate = useNavigate()
-    const [orders, setOrders] = useState([])
-    const { user,logout } = useContext(UserContext)
+    const { user, logout } = useContext(UserContext)
+    const { orders } = useContext(CartContext)
 
 
     return (
@@ -24,21 +26,25 @@ const Account = () => {
             <Content>
                 <Oders>
                     {orders.length ? (
-                        orders.map((order) => {
-
-                        })
+                        orders.map((order) => (
+                            <OrderItem key={order.id} data={order} />
+                        ))
                     ) : (
                         <h2>No Orders</h2>
                     )}
                 </Oders>
-                <Profile>
-                    <ProfilePhoto src={user.photo} />
-                    <Name>{user.name}</Name>
-                    <SignoutBtn onClick={() => logout()} >Sign out</SignoutBtn>
-                    {user.isAdmin ? (<AdminBtn onClick={() => navigate('/admin')} >Admin</AdminBtn>) : (<></>)}
-                    <h3>Current cart:</h3>
-                    <OrderSummaty/>
-                </Profile>
+                <div>
+                    <Profile>
+                        <ProfilePhoto src={user.photo} />
+                        <Name>{user.name}</Name>
+                        <AvaliableMoney>
+                            <p>Available</p>
+                            <h3>${user.money} USD</h3>
+                        </AvaliableMoney>
+                        <SignoutBtn onClick={() => logout()} >Sign out</SignoutBtn>
+                        {user.isAdmin ? (<AdminBtn onClick={() => navigate('/admin')} >Admin</AdminBtn>) : (<></>)}
+                    </Profile>
+                </div>
             </Content>
         </Container>
     )

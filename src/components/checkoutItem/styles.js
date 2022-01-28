@@ -7,11 +7,11 @@ export const Container = styled.div`
     display: grid;
     grid-template-columns: 200px auto;
     grid-gap: 10px;
-    background-color:#f9f9f9;
-    border-radius: 5px;
+    background-color:#ffffff;
+    /* border-radius: 5px; */
     margin-bottom: 15px;
     padding: 5px;
-    /* border: 1px solid #c1c1c1; */
+    border: 1px solid #c1c1c1;
 `
 
 export const Photo = styled.div`
@@ -23,6 +23,8 @@ export const Photo = styled.div`
     background-size: cover;
     background-position: center;
     cursor: pointer;
+    border: 1px solid #ececec;
+
 `
 
 export const Info = styled.div`
@@ -31,7 +33,7 @@ export const Info = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #f9f9f9;
+    background-color: #ffffff;
     padding: 5px;
 `
 

@@ -8,49 +8,23 @@ import {
     SigninWithEmailBtn,
     SigninWithEmailRegisterBtn
 } from './styles'
-import { googleAuthProvider, auth } from '../../firebase/index'
 import UserContext from '../../context/userState/Context'
-import { toast } from 'react-toastify'
+
 
 const Signin = () => {
-    const { login } = useContext(UserContext)
+    const { signinWithGoogle, signinWithEmailAndPassword} = useContext(UserContext)
 
     const handleSigninWithGoogle = async () => {
-        await auth.signInWithPopup(googleAuthProvider).then((success) => {
-            const u = success.user;
-            const obj = {
-                name: u.displayName,
-                email: u.email,
-                uid: u.uid,
-                photo: u.photoURL,
-            };
-            login(obj);
-        }).catch((error) => {
-            toast.error('Something went wrong, please try again later.', { position: 'top-right' })
-        })
+        await signinWithGoogle()
+        return
     };
 
-    const handleOnSubmit = (e) => {
+    const handleOnSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                var user = userCredential.user;
-                const userObj = {
-                    email,
-                    uid: user.uid,
-                    name: user.displayName,
-                    photo: AVATAR_DEFAULT_PHOTO
-                }
-                login(userObj)
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if(errorCode === 'auth/user-not-found') toast.error('User not found.', { position: 'top-right' })
-                else toast.error('Something went wrong, please try again later.', { position: 'top-right' })
-            });
+        await signinWithEmailAndPassword(email,password)
+        return
     }
 
     return (
