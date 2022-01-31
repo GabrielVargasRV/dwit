@@ -12,11 +12,23 @@ export const Content = styled.div`
     width: 940px;
     display: grid;
     grid-template-columns: 70% 30%;
+    grid-template-areas: "form info";
     grid-gap: 10px;
     margin: 0 auto;
+
+    @media (max-width: 940px){
+        width: 100%;
+        padding: 0 10px;
+    }
+    @media (max-width: 640px){
+        grid-template-columns: 100%;
+        grid-template-areas: "info"
+                             "form";
+    }
 `
 
 export const Form = styled.form`
+    grid-area: form;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -32,6 +44,7 @@ export const Form = styled.form`
 `
 
 export const Info = styled.div`
+    grid-area: info;
     width: 100%;
     & hr{
         border-color: #000000;

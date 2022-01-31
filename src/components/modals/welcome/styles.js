@@ -9,6 +9,12 @@ export const Container = styled.div`
     border-radius: 20px;
     padding: 20px;
     border: 1px solid #ececec;
+    @media (max-width: 410px){
+        width: 340px;
+    }
+    @media (max-width: 350px){
+        width: 310px;
+    }
 `
 
 export const Header = styled.div`

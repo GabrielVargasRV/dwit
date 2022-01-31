@@ -18,6 +18,12 @@ export const Top = styled.div`
     background-color: #000814;
     padding: 10px;
     color: #fff;
+    
+    @media (max-width: 720px){
+        display: grid;
+        grid-template-areas:"logo cart heart user"
+                            "input input input input";
+    }
 `
 
 export const Bottom = styled.div`
@@ -30,17 +36,20 @@ export const Bottom = styled.div`
     color: #fff;
     padding: 10px;
 
-    & button{
-        border-style: none;
-        width: 100px;
-        height: 100%;
-        color: #ffffff;
-        background-color: #202020;
-        cursor: pointer;
-    }
+`
+
+export const CategoryBtn = styled.button`
+    border-style: none;
+    width: 100px;
+    height: 100%;
+    color: #ffffff;
+    background-color: #202020;
+    cursor: pointer;
+    color: ${(props) => props.onpath ? '#FFC300':'#ffffff'};
 `
 
 export const Logo = styled.h1`
+    grid-area: logo;
     font-family: 'Licorice', cursive;
     color: #FFC300;
     cursor: pointer;
@@ -49,6 +58,7 @@ export const Logo = styled.h1`
 `
 
 export const InputContainer = styled.div`
+    grid-area: input;
     width: 40%;
     height: 40px;
     display: grid;
@@ -60,6 +70,11 @@ export const InputContainer = styled.div`
     box-sizing: border-box;
     border-radius: ${(props) => props.searching ? '5px 5px 0px 0px' : '5px'};
     /* border:1px solid #ececec; */
+
+    @media (max-width: 720px){
+        width: 100%;
+        margin-bottom: 10px;
+    }
 `
 
 export const Input = styled.input`
@@ -144,7 +159,7 @@ export const Checkout = styled(Link)`
     }
 `
 
-export const ShoppingCart = styled.i`
+export const Icon = styled.i`
     height:100%;
     min-width: 50px;
     color: #FFC300;
@@ -152,9 +167,10 @@ export const ShoppingCart = styled.i`
     justify-content: center;
     align-items: center;
     font-size: 28px;
-    background-color: #303030;
+    background-color: transparent;
     border-radius: 0px 3px 3px 0px;
     text-decoration: none;
+    cursor: pointer;
     & p{
         text-decoration: none;
         position: absolute;
@@ -164,4 +180,17 @@ export const ShoppingCart = styled.i`
         color: #fff;
         font-size: 12px;
     }
+`
+
+
+export const CartIcon = styled(Icon)`
+    grid-area: cart;
+`
+
+export const HeartIcon = styled(Icon)`
+    grid-area: heart;
+`
+
+export const UserIcon = styled(Icon)`
+    grid-area: user;
 `

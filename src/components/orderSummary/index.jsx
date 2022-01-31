@@ -2,10 +2,10 @@ import React,{useContext} from 'react';
 import {
     Container,
 } from './styles'
-import Context from '../../context/cartState/Context'
+import CartContext from '../../context/cartState/Context'
 
 const OrderSummary = () => {
-    const {cartFullInfo,subTotal} = useContext(Context)
+    const {cartFullInfo,subTotal} = useContext(CartContext)
 
     return (
         <Container>

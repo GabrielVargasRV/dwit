@@ -19,6 +19,10 @@ export const Content = styled.div`
         padding-left: 30px;
         margin-top: 10px;
     }
+
+    @media (max-width: 940px){
+        width: 100%;
+    }
 `
 
 export const ShoppingCart = styled.i`

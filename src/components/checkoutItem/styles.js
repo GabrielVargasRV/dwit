@@ -12,6 +12,11 @@ export const Container = styled.div`
     margin-bottom: 15px;
     padding: 5px;
     border: 1px solid #c1c1c1;
+
+    @media (max-width: 440px){
+        height: 150px;
+        grid-template-columns: 150px auto;
+    }
 `
 
 export const Photo = styled.div`
@@ -46,6 +51,9 @@ export const Bottom = styled.div`
 `
 
 export const Title = styled.h3`
+    @media (max-width: 440px){
+        font-size: 16px;
+    }
 `
 
 export const Size = styled.p`
@@ -69,5 +77,10 @@ export const RemoveBtn = styled.button`
     border: 1px solid #f20000;
     &:hover{
         opacity: 0.8;
+    }
+
+    @media (max-width: 440px){
+        width: 80px;
+        height: 30px;
     }
 `

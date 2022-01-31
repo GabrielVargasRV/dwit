@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState } from 'react'
 import LoadingSpinner from '../../components/loadingSpinner/index'
 import { useNavigate } from 'react-router-dom'
-import {db} from '../../firebase/index'
+import { db } from '../../firebase/index'
 
 export const Container = styled.div`
     width: 100%;
@@ -15,6 +15,12 @@ export const Container = styled.div`
     margin-bottom: 15px;
     padding: 5px;
     border: 1px solid #ececec;
+
+    @media (max-width: 860px){
+        height: 150px;
+        grid-template-columns: 100px auto;
+
+    }
 `
 
 export const Photo = styled.div`
@@ -55,6 +61,9 @@ export const Size = styled.p`
     margin: 3px;
     padding: 3px;
     border-radius: 3px;
+    @media (max-width: 860px){
+       font-size: 12px;
+    }
 `
 
 export const Sizes = styled.div`
@@ -74,6 +83,10 @@ export const Category = styled.p`
     margin: 3px;
     padding: 3px;
     border-radius: 3px;
+
+    @media (max-width: 860px){
+       font-size: 12px;
+    }
 `
 
 export const Price = styled.p`
@@ -94,6 +107,11 @@ export const EditBtn = styled.button`
     &:hover{
         opacity: 0.8;
     }
+
+    @media (max-width: 860px){
+        width: 80px;
+        height: 30px;
+    }
 `
 
 export const RemoveBtn = styled.button`
@@ -111,6 +129,11 @@ export const RemoveBtn = styled.button`
     border: 1px solid #f20000;
     &:hover{
         opacity: 0.8;
+    }
+
+    @media (max-width: 860px){
+        width: 80px;
+        height: 30px;
     }
 `
 

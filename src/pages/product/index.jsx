@@ -12,7 +12,8 @@ import {
     Sizes,
     Size,
     Price,
-    RelatedProducts
+    RelatedProducts,
+    Heart
 } from './styles'
 import { useParams } from 'react-router-dom'
 import { useGetProductById } from '../../hooks/useGetProductById'
@@ -32,20 +33,18 @@ const Product = () => {
     const [addingToCart, setAddingToCart] = useState(false)
     const [activeSize, setActiveSize] = useState(0)
     const [related, setRelated] = useState([])
-    const { addProductToCart } = useContext(CartContext)
+    const { addProductToCart,removeFromFavorites,addToFavorites,favorites } = useContext(CartContext)
+    const [isLiked,setIsLiked] = useState(false)
 
-    useEffect(() => {
-        setActiveSize(0)
-        useGetProductById(id, (res) => {
-            if (res) {
-                setData(res)
-                useGetProductsByCategory(res.category[0], (response) => {
-                    setRelated([...response])
-                    setLoading(false)
-                }, 4)
-            }
-        })
-    }, [id])
+    const handleOnClick = () => {
+        if(isLiked){
+            removeFromFavorites(data.id)
+            setIsLiked(false)
+        }else {
+            addToFavorites(data.id)
+            setIsLiked(true)
+        }
+    }
 
     const handleAddProductToCart = () => {
         if (!loading) {
@@ -62,13 +61,34 @@ const Product = () => {
         }
     }
 
+    useEffect(() => {
+        setActiveSize(0)
+        if(favorites.includes(id)) setIsLiked(true)
+        useGetProductById(id, (res) => {
+            if (res) {
+                setData(res)
+                useGetProductsByCategory(res.category[0], (response) => {
+                    setRelated([...response])
+                    setLoading(false)
+                }, 4)
+            }
+        })
+    }, [id])
+
+
     if (loading) return <LoadingPage />
 
     return (
         <Container>
             <Content>
                 <Center>
-                    <Photo bg={data.image} ></Photo>
+                    <Photo bg={data.image} >
+                        <Heart
+                            onClick={handleOnClick}
+                            isLiked={isLiked}
+                            className={[isLiked ? "fas fa-heart" : "far fa-heart", "heart-icon"]}
+                        ></Heart>
+                    </Photo>
                     <Info>
                         <InfoTop>
                             <Tittle>{data.title}</Tittle>

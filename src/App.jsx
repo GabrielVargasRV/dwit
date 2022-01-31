@@ -20,6 +20,8 @@ const Account = React.lazy(() => import('./pages/account/index'))
 const Signin = React.lazy(() => import('./pages/signin/index'))
 const Signup = React.lazy(() => import('./pages/signup/index'))
 const Admin = React.lazy(() => import('./pages/admin/index'))
+const Favorites = React.lazy(() => import('./pages/favorites/index'))
+
 
 const App = () => {
   const { isLogged } = useContext(UserContext)
@@ -81,6 +83,12 @@ const App = () => {
         <Route exact path="/admin/:id" element={
           <React.Suspense fallback={<Loading />} >
             <Admin />
+          </React.Suspense>
+        } />
+
+        <Route exact path="/favorites" element={
+          <React.Suspense fallback={<Loading />} >
+            <Favorites />
           </React.Suspense>
         } />
       </Routes>

@@ -23,7 +23,7 @@ const Payment = () => {
 
 
     const handleSuccess = (success) => {
-        addNewOrder(buyer,cartFullInfo,subTotal)
+        addNewOrder(cartFullInfo,subTotal)
         clearCart()
         setModal(<PaymentSuccess/>)
         navigate('/account')

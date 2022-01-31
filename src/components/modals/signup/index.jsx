@@ -11,11 +11,9 @@ import {
 } from './styles'
 import UserContext from '../../../context/userState/Context'
 import ModalContext from '../../../context/modalState/Context'
-import { useNavigate } from 'react-router-dom'
 import SigninModal from '../signin/index'
 
 const Signup = () => {
-    const navigate = useNavigate()
     const { createUserWithEmailAndPassword } = useContext(UserContext)
     const {setModal,closeModal} = useContext(ModalContext)
     const [viewPassword, setViewPassword] = useState(false)
@@ -26,7 +24,9 @@ const Signup = () => {
         const password = e.target.password.value
         const name = e.target.name.value
         await createUserWithEmailAndPassword(email, password, name)
-        navigate('/account')
+        .then((res) => {
+            closeModal()
+        })
     }
 
     return (

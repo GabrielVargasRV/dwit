@@ -26,7 +26,7 @@ const Signin = () => {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
-        const password = e.target.password.value;n 
+        const password = e.target.password.value;
         await signinWithEmailAndPassword(email,password)
         closeModal()
         return

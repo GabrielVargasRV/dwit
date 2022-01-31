@@ -8,7 +8,8 @@ import {
     Name,
     SignoutBtn,
     AdminBtn,
-    AvaliableMoney
+    AvaliableMoney,
+    ProfileContainer
 } from './styles'
 import UserContext from '../../context/userState/Context'
 import CartContext from '../../context/cartState/Context'
@@ -20,20 +21,22 @@ const Account = () => {
     const { user, logout } = useContext(UserContext)
     const { orders } = useContext(CartContext)
 
-
     return (
         <Container>
             <Content>
                 <Oders>
                     {orders.length ? (
-                        orders.map((order) => (
-                            <OrderItem key={order.id} data={order} />
-                        ))
+                        <div>
+                            <h2 style={{marginBottom: '10px'}} >Orders:</h2>
+                            {orders.map((order) => (
+                                <OrderItem key={order.id} data={order} />
+                            ))}
+                        </div>
                     ) : (
                         <h2>No Orders</h2>
                     )}
                 </Oders>
-                <div>
+                <ProfileContainer>
                     <Profile>
                         <ProfilePhoto src={user.photo} />
                         <Name>{user.name}</Name>
@@ -44,7 +47,7 @@ const Account = () => {
                         <SignoutBtn onClick={() => logout()} >Sign out</SignoutBtn>
                         {user.isAdmin ? (<AdminBtn onClick={() => navigate('/admin')} >Admin</AdminBtn>) : (<></>)}
                     </Profile>
-                </div>
+                </ProfileContainer>
             </Content>
         </Container>
     )

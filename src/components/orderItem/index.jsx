@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Container,
     Product,
     Info,
     ArrowsContainer,
     ButtonsContainer,
+    CancelBtn,
+    Title,
+    Status
 } from './styles'
+import CartContext from '../../context/cartState/Context'
 
 const OrderItem = ({ data }) => {
     const [productIndex, setProductIndex] = useState(0)
+    const { cancelOrder } = useContext(CartContext)
 
     return (
         <Container>
@@ -20,7 +25,7 @@ const OrderItem = ({ data }) => {
                             <i className="fas fa-chevron-left"></i>
                         </button>
                     ) : (<div></div>)}
-                    {productIndex < data.cart.length -1 ? (
+                    {productIndex < data.cart.length - 1 ? (
                         <button onClick={() => setProductIndex(productIndex + 1)} >
                             <i className="fas fa-chevron-right"></i>
                         </button>
@@ -33,13 +38,17 @@ const OrderItem = ({ data }) => {
             </Product>
             <Info>
                 <div>
-                    <h2>{data.cart.length} Products</h2>
+                    <Title>{data.cart.length} Products</Title>
                     <p>${data.total} USD</p>
-                    <p style={{marginTop: '10px'}} >Status: {data.status}</p>
+                    <Status >Status: {data.status}</Status>
                 </div>
-                <ButtonsContainer>
-
-                </ButtonsContainer>
+                {data.status !== 'delivered' ? (
+                    <ButtonsContainer>
+                        {data.status !== 'canceled' ? (
+                            <CancelBtn onClick={() => cancelOrder(data.id)} >Cancel Order</CancelBtn>
+                        ) : (<></>)}
+                    </ButtonsContainer>
+                ) : (<></>)}
             </Info>
         </Container>
     )

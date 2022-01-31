@@ -14,15 +14,28 @@ export const Content = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 70% 30%;
+    grid-template-areas: "products info";
     margin: 0 auto;
     grid-gap: 10px;
+
+    @media (max-width: 940px){
+        width: 100%;
+        padding: 0 10px;
+    }
+    @media (max-width: 640px){
+        grid-template-columns: 100%;
+        grid-template-areas: "info"
+                             "products";
+    }
 `
 
 export const Products = styled.div`
+    grid-area: products;
     width: 100%;
 `
 
 export const Info = styled.div`
+    grid-area: info;
     width: 100%;
     & hr{
         border-color: #000000;

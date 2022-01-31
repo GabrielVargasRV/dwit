@@ -13,11 +13,29 @@ export const Content = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 70% 30%;
+    grid-template-areas: "orders profile";
     margin: 0 auto;
     grid-gap: 10px;
+
+    @media (max-width: 940px){
+        width: 100%;
+        padding: 0 10px;
+        grid-template-columns: 60% 40%;
+    }
+
+    @media (max-width: 740px){
+        grid-template-columns: 100%;
+        grid-template-areas:"profile"
+                            "orders";
+    }
 `
 
 export const Oders = styled.div`
+    grid-area: orders;
+`
+
+export const ProfileContainer = styled.div`
+    grid-area: profile;
 `
 
 export const Profile = styled.div`

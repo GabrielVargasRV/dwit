@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 export const SigninBox = styled.div`
-width: 340px;
-height: 400px;
-display: flex;
-flex-direction: column;
-align-items: center;
-border: 1px solid #ececec;
-border-radius: 5px;
-background-color: #ffffff;
-padding: 20px 0px;
+    width: 340px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 20px 0px;
+    @media (max-width: 340px){
+            width: 310px;
+    }
 `
 
 export const CloseBtn = styled.button`
@@ -26,6 +29,10 @@ export const CloseBtn = styled.button`
     &:hover{
         color: red;
     }
+
+    &:active{
+        color: red;
+    }
 `
 
 export const Top = styled.div`
@@ -33,6 +40,10 @@ export const Top = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const SigninWithGoogleBtn = styled.button`
@@ -47,6 +58,9 @@ export const SigninWithGoogleBtn = styled.button`
     & i{
         margin-left: 5px;
     }
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const SigninWithEmail = styled.form`
@@ -56,6 +70,10 @@ export const SigninWithEmail = styled.form`
     flex-direction: column;
     justify-content: space-between;
     margin-top: 50px;
+
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const SigninWithEmailInput = styled.input`

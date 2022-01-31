@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 315px;
-    height: 110px;
+    width: 350px;
+    height: 210px;
+    display: grid;
+    grid-template-rows: 40px auto;
     background-color: #ffffff;
     border-radius: 20px;
     padding: 10px;
+
+    @media (max-width: 360px){
+        width: 310px;
+    }
 `
 
 export const CloseBtn = styled.button`
@@ -31,6 +37,8 @@ export const Top = styled.div`
 `
 
 export const Center = styled.div`
+    width:100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

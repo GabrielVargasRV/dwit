@@ -12,16 +12,31 @@ export const Content = styled.div`
     height: 100%;
     display: grid;
     grid-template-columns: 60% 40%;
+    grid-template-areas: "products form";
     margin: 0 auto;
     grid-gap: 10px;
+
+    @media (max-width: 940px){
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    @media (max-width: 860px){
+        grid-template-columns: 100%;
+        /* grid-template-rows: auto auto; */
+        grid-template-areas: "form"
+                             "products";
+    }
 `
 
 export const Products = styled.div`
+    grid-area: products;
     width: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 `
 
 export const ProductForm = styled.div`
+    grid-area: form;
     width: 100%;
     display: flex;
     flex-direction: column;

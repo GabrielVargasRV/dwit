@@ -18,7 +18,11 @@ export const SignupBox = styled.div`
     border-radius: 5px;
     background-color: #ececec;
     padding: 20px 0px;
-    `
+
+    @media (max-width: 340px){
+        width: 310px;
+    }
+`
 
 export const Form = styled.form`
     width: 300px;
@@ -26,6 +30,10 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const Input = styled.input`

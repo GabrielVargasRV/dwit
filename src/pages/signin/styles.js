@@ -19,6 +19,10 @@ export const SigninBox = styled.div`
     border-radius: 5px;
     background-color: #ececec;
     padding: 20px 0px;
+
+    @media (max-width: 340px){
+        width: 310px;
+    }
 `
 
 export const SigninWithGoogleBtn = styled.button`
@@ -33,6 +37,10 @@ export const SigninWithGoogleBtn = styled.button`
     & i{
         margin-left: 5px;
     }
+
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const SigninWithEmail = styled.form`
@@ -42,6 +50,10 @@ export const SigninWithEmail = styled.form`
     flex-direction: column;
     justify-content: space-between;
     margin-top: 50px;
+
+    @media (max-width: 340px){
+        width: 280px;
+    }
 `
 
 export const SigninWithEmailInput = styled.input`

@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
-import { auth, db, googleAuthProvider } from '../../firebase/index'
-import { toast } from 'react-toastify'
-const AVATAR_DEFAULT_PHOTO = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+import { auth } from '../../firebase/index'
+import User from '../../apis/userApi';
 
-const getUserData = async (uid, callback) => {
-    const res = await db.collection('users').doc(uid).get()
-    if (callback) callback(res.data())
-    return res.data()
-}
 
-const setUserData = async (user, callback) => {
-    await db.collection('users').doc(user.uid).set({
-        ...user,
-        money: 5000
-    })
-    const res = await getUserData(user.uid)
-    if (callback) callback(res)
-    return res
-}
+const _user = new User();
 
 const State = (props) => {
     const initialState = {
@@ -28,8 +14,9 @@ const State = (props) => {
     const [state, setState] = useState(initialState)
 
     const login = async (user) => {
-        let res = await getUserData(user.uid)
-        if (!res) res = await setUserData(user)
+        if(!user) return
+        let res = await _user.getUserData(user.uid);
+        if (!res) res = await _user.setUserData(user);
         setState({
             ...state,
             user: res,
@@ -38,7 +25,8 @@ const State = (props) => {
     }
 
     const logup = async (user) => {
-        const res = await setUserData(user)
+        if(!user) return
+        const res = await _user.setUserData(user);
         setState({
             ...state,
             user: res,
@@ -52,79 +40,44 @@ const State = (props) => {
             isLogged: false,
             user: null
         })
-        auth.signOut()
+        _user.signOut();
     }
 
     const signinWithGoogle = async () => {
-        await auth.signInWithPopup(googleAuthProvider).then((success) => {
-            const u = success.user;
-            const obj = {
-                name: u.displayName,
-                email: u.email,
-                uid: u.uid,
-                photo: u.photoURL,
-            };
-            login(obj);
-        }).catch((error) => {
-            toast.error('Something went wrong, please try again later.', { position: 'top-right' })
-        })
+        const res = await _user.signInWithGoogle();
+        if(res) login(res);
+        return
     }
 
     const signinWithEmailAndPassword = async (email, password) => {
-        await auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user
-                const userObj = {
-                    email,
-                    uid: user.uid,
-                    name: user.displayName,
-                    photo: AVATAR_DEFAULT_PHOTO
-                }
-                login(userObj)
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (errorCode === 'auth/user-not-found') toast.error('User not found.', { position: 'top-right' })
-                else toast.error('Something went wrong, please try again later.', { position: 'top-right' })
-            });
-        return
+        if(!email || !password) return;
+        const user = await _user.signInWithEmailAndPassword(email,password);
+        if(user) await login(user)
+        return user
     }
 
     const createUserWithEmailAndPassword = async (email, password, name) => {
-        await auth.createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user
-                const userObj = {
-                    email,
-                    uid: user.uid,
-                    name,
-                    photo: AVATAR_DEFAULT_PHOTO
-                }
-                logup(userObj)
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                toast.error('Something went wrong, please try again later.', { position: 'top-right' })
-            });
-        return
+        if(!email || !password || !name) return;
+        const user = await _user.createUserWithEmailAndPassword(email,password, name);
+        if(user) await logup(user)
+        return user
     }
 
     const updateUser = async (callback) => {
         if (!state.isLogged && !state.user) return
-        const res = await getUserData(state.user.uid)
+        const res = await _user.getUserData(state.user.uid);
+        _user.setUser(res);
         setState({
             ...state,
             user:res
         })
-        if(callback) return callback()
-        return
+        if(callback) return callback(res);
+        return res;
     }
-
-    useEffect(() => {
+    const init = () => {
         const unsubscribe = auth.onAuthStateChanged((u) => {
             if (u) {
-                getUserData(u.uid, (user) => {
+                _user.getUserData(u.uid, (user) => {
                     if (user) {
                         setState({
                             ...state,
@@ -135,6 +88,11 @@ const State = (props) => {
                 })
             }
         })
+        return unsubscribe;
+    }
+
+    useEffect(() => {
+        const unsubscribe = init();
         return () => unsubscribe()
     }, [])
 
