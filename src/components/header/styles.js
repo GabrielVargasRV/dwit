@@ -55,6 +55,10 @@ export const Logo = styled.h1`
     cursor: pointer;
     font-size: 44px;
     text-decoration: none;
+    text-shadow: 2px 2px #202020;
+
+    &:hover{
+    }
 `
 
 export const InputContainer = styled.div`
@@ -171,6 +175,7 @@ export const Icon = styled.i`
     border-radius: 0px 3px 3px 0px;
     text-decoration: none;
     cursor: pointer;
+    text-shadow: 2px 2px #202020;
     & p{
         text-decoration: none;
         position: absolute;
@@ -179,6 +184,7 @@ export const Icon = styled.i`
         /* margin: 10px auto; */
         color: #fff;
         font-size: 12px;
+        text-shadow: 0px 0px #202020;
     }
 `
 

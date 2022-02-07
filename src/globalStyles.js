@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -8,13 +8,19 @@ const GlobalStyle = createGlobalStyle`
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
   body{
+    /* background-color: #F5F7FA; */
     background-color: #F5F7FA;
+    opacity: 1;
+    background-image:  radial-gradient(#FFC300 0.5px, transparent 0.5px), radial-gradient(#FFC300 0.5px, #F5F7FA 0.5px);
+    background-size: 44px 44px;
+    background-position: 0 0,22px 22px;
   }
+
   .lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
   }
   .lds-ring div {
     box-sizing: border-box;
