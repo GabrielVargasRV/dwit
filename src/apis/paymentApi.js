@@ -13,6 +13,7 @@ class Payment {
     async addNewOrder(product, total, user){
         if(!product || !total || !user) return null;
         const buyer = this.buyer;
+        const date = Date.now();
         const res = await db.collection('orders').add({
             buyer: {
                 ...buyer,
@@ -22,7 +23,8 @@ class Payment {
             uid: user.uid,
             cart: product,
             total: total,
-            status: 'processing purchase'
+            status: 'processing purchase',
+            date: date
         });
 
         return res.id;
@@ -32,7 +34,7 @@ class Payment {
         if(!uid) return null;
 
         let orders = [];
-        const res = await db.collection('orders').where('uid', '==', uid).get();
+        const res = await db.collection('orders').where('uid', '==', uid).orderBy('date','desc').get();
         
         res.docs.forEach((order,index) => {
             orders.push({id: order.id, ...order.data()});

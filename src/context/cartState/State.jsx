@@ -24,7 +24,6 @@ const State = (props) => {
     const removeProductFromCart = async (idInCart, callback) => {
         _cart.setCart(state.cart)
         await _cart.removeFromCart(idInCart,({cart,cartFullInfo,subTotal}) => {
-            console.log(cart)
             setState({...state,cart,subTotal,cartFullInfo});
         });
         const newCart = _cart.getCart();

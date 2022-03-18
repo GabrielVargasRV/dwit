@@ -94,3 +94,14 @@ export const PaymentButton = styled.button`
     cursor: pointer;
     margin-top: 5px;
 `
+
+export const Warning = styled.p`
+    color: #ff0000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    & i{
+        font-size: 18px;
+        margin-right: 5px; 
+    }
+`

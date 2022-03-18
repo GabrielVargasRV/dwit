@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext,useRef } from 'react';
 import {
     Container,
     Content,
@@ -34,6 +34,7 @@ const Admin = () => {
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState(productInitialState)
     const [categoryText, setCategoryText] = useState('')
+    const formRef = useRef(null)
     const [sizeData, setSizeData] = useState({
         size: '',
         price: 0
@@ -100,6 +101,10 @@ const Admin = () => {
     }
 
     useEffect(() => {
+        if(formRef.current){
+            formRef.current.scrollIntoView({behavior: 'smooth'})  
+        }
+
         if (!user || !user.isAdmin) navigate('/account')
         else {
             if(id){
@@ -120,7 +125,7 @@ const Admin = () => {
                 <Products>
                     {products.map((item,index) => <ProductItem key={`${item.id}-${index}`} data={item} />)}
                 </Products>
-                <ProductForm>
+                <ProductForm ref={formRef} >
                     <ProductFormPhoto bg={product.image} ></ProductFormPhoto>
                     <Input placeholder="Image url" name="image" value={product.image} onChange={handleOnChange} />
                     <Input placeholder="Title" name="title" value={product.title} onChange={handleOnChange} />

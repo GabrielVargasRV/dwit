@@ -46,7 +46,7 @@ const Header = () => {
                         onChange={handleOnChange}
                         searching={inputFocus}
                         onFocus={() => setInputFocus(true)}
-                        onBlur={() => setTimeout(() => { setInputFocus(false) }, 300)} />
+                        onBlur={() => setTimeout(() => { setInputFocus(false) }, 150)} />
                     <InputResults
                         searching={inputFocus}
                         h={(searchData.length * 50) + 3} >

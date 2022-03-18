@@ -13,7 +13,8 @@ import {
     Size,
     Price,
     RelatedProducts,
-    Heart
+    Heart,
+    SizeGuide
 } from './styles'
 import { useParams } from 'react-router-dom'
 import { useGetProductById } from '../../hooks/useGetProductById'
@@ -24,6 +25,8 @@ import LoadingPage from '../loading/index'
 import { toast } from 'react-toastify'
 import Notification from '../../components/notification/index'
 import LoadingSpinner from '../../components/loadingSpinner/index'
+import SizeGuideModal from '../../components/modals/sizeGuide/index'
+import ModalContext from '../../context/modalState/Context'
 
 
 const Product = () => {
@@ -34,6 +37,7 @@ const Product = () => {
     const [activeSize, setActiveSize] = useState(0)
     const [related, setRelated] = useState([])
     const { addProductToCart,removeFromFavorites,addToFavorites,favorites } = useContext(CartContext)
+    const {setModal} = useContext(ModalContext)
     const [isLiked,setIsLiked] = useState(false)
 
     const handleOnClick = () => {
@@ -103,6 +107,10 @@ const Product = () => {
                             </Sizes>
                         </InfoTop>
                         <div>
+                            <SizeGuide onClick={() => setModal(<SizeGuideModal/>)} >
+                                <i className="fas fa-ruler"></i> 
+                                <span>Size guide</span>
+                            </SizeGuide>
                             <Price>${data.sizes[activeSize].price}</Price>
                             <AddToCartBtn onClick={() => { handleAddProductToCart() }} >
                                 {addingToCart ? (

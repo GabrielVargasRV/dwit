@@ -155,3 +155,29 @@ export const RelatedProducts = styled.div`
     }
 `
 
+
+
+export const SizeGuide = styled.button`
+    color: #000;
+    border-style: none;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &:hover{
+        color: #339AF0;
+    }
+
+    & i{
+        margin-right: 5px;
+    }
+
+    & span{
+        background: transparent;
+    }
+`

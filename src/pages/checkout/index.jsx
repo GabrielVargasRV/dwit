@@ -1,10 +1,10 @@
-import React, { useContext,useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
     Container,
     Content,
     Products,
     Info,
-    ContinueBtn
+    ContinueBtn,
 } from './styles'
 import CartContext from '../../context/cartState/Context';
 import Product from '../../components/checkoutItem/index';

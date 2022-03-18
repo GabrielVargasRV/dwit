@@ -4,7 +4,6 @@ import {
     Header,
     CloseBtn,
     Content,
-    Strong,
     Footer,
     Step,
     StepBar,
@@ -12,7 +11,7 @@ import {
     Image,
 } from './styles'
 import ModalContext from '../../../context/modalState/Context'
-import PaypalButtonImg from '../../../assets/paypal-button-advise.jpg'
+import PaypalButtonImg from '../../../assets/payment-warning-dwit.png'
 
 const First = () => {
     return (
@@ -22,9 +21,7 @@ const First = () => {
                 Disclaimer
             </h3>
             <p>
-                This web application is not a real clothing store, this web application was developed by
-                <Strong target="_blank" href="https://gabriel-vargas-cf193.web.app/" > Gabriel Vargas</Strong> (me) to practice my development skills
-                and to gain more experience making applications. thanks for taking a look.
+                None of the products you see on this page are for sale, when you proceed with the payment you will not be charged or asked for payment information and no shipment will be processed.
             </p>
         </Content>
     )
@@ -34,7 +31,6 @@ const Second = () => {
     return(
         <Content>
             <Image bg={PaypalButtonImg} />
-            <p>As this is not a real store, the payment button will not charge you anything and no shipment will be processed.</p>
         </Content>
     )
 }

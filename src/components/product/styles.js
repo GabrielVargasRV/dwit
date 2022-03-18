@@ -34,6 +34,10 @@ export const Container = styled.div`
     }
     @media (max-width: 720px){
         height: 400px;
+
+        &:hover{
+            transform: scale(1);
+        }
     }
 `
 

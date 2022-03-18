@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import {
     Container,
     Product,
@@ -7,13 +7,22 @@ import {
     ButtonsContainer,
     CancelBtn,
     Title,
-    Status
+    Status,
+    TimeFromNow
 } from './styles'
 import CartContext from '../../context/cartState/Context'
+import moment from 'moment'
 
 const OrderItem = ({ data }) => {
     const [productIndex, setProductIndex] = useState(0)
     const { cancelOrder } = useContext(CartContext)
+    const [dateAgo,setDateAgo] = useState('')
+    
+    useEffect(() => {
+        const date = new Date(data.date)
+        const ago = moment(date).fromNow()
+        setDateAgo(ago)
+    },[])
 
     return (
         <Container>
@@ -38,6 +47,7 @@ const OrderItem = ({ data }) => {
             </Product>
             <Info>
                 <div>
+                <TimeFromNow>{dateAgo}</TimeFromNow>
                     <Title>{data.cart.length} Products</Title>
                     <p>${data.total} USD</p>
                     <Status >Status: {data.status}</Status>

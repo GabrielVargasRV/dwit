@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 400px;
-    height: 500px;
+    height: 350px;
     display: grid;
     grid-template-rows: 40px auto 40px;
     background-color: #ffffff;
@@ -113,7 +113,7 @@ export const Strong = styled.a`
 
 export const Image = styled.div`
     width: 100%;
-    height: 250px;
+    height: 200px;
     background-image: ${(props) => `url(${props.bg})`};
     background-repeat: no-repeat;
     background-size: cover;

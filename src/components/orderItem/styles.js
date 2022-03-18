@@ -67,6 +67,7 @@ export const Info = styled.div`
 export const ButtonsContainer = styled.div`
     width: 100%;
     display: flex;
+    align-items: flex-end;
     justify-content: flex-end;
 `
 
@@ -104,6 +105,12 @@ export const Status = styled.p`
     @media (max-width: 440px){
         font-size: 14px;
     }
+`
+
+export const TimeFromNow = styled.p`
+    color: #a1a1a1;
+    width: 100%;
+    /* font-weight: bold; */
 `
 
 export const RepurchaseBtn = styled.button``
