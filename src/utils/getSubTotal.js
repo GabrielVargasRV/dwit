@@ -1,4 +1,3 @@
-import getProductById from './getProductById';
 
 const getSubTotal = async (cart, callback) => {
     if(!cart) return null;

@@ -20,6 +20,7 @@ export const Container = styled.div`
     /* border: 1px solid #c1c1c1; */
     border-radius: 5px;
     transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,.1);
 
     &:hover ${Heart}{
         display: block;
@@ -29,7 +30,6 @@ export const Container = styled.div`
         position: relative;
         transform: scale(1.12);
         box-shadow: 0px 0px 80px -20px rgba(130,130,130,0.75);
-        /* box-shadow: 0px 0px 9px 0px rgba(32,32,32,0.66); */
         z-index: 5;
     }
     @media (max-width: 720px){
