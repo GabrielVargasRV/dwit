@@ -25,11 +25,15 @@ const Payment = () => {
     const [loadingPayment,setLoadingPayment] = useState(false);
 
     const handleSuccess = (success) => {
-        setLoadingPayment(false)
-        addNewOrder(cartFullInfo,subTotal)
-        clearCart()
-        setModal(<PaymentSuccess/>)
-        navigate('/account')
+        try{
+            setLoadingPayment(false)
+            addNewOrder(cartFullInfo,subTotal)
+            clearCart()
+            setModal(<PaymentSuccess/>)
+            navigate('/account')
+        }catch(e){
+            toast.error('Something went wrong!');
+        }
     }
 
     const handleError = (error) => {
@@ -54,7 +58,7 @@ const Payment = () => {
         <Container>
             <Content>
                 <Products>
-                    {cart.map((product, index) => {
+                    {cart.map((product) => {
                         return <Product key={product.idInCart} id={product.id} s={product.size} idInCart={product.idInCart} />
                     })}
                 </Products>
