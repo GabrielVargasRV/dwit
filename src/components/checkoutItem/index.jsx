@@ -81,6 +81,7 @@ const CheckoutItem = (props) => {
                 setLoading(false)
             }
         })
+        return () => setLoading(false)
     }, [])
 
     if (loading) return <Loading />

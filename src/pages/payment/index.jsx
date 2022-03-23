@@ -55,7 +55,7 @@ const Payment = () => {
             <Content>
                 <Products>
                     {cart.map((product, index) => {
-                        return <Product key={index} id={product.id} s={product.size} idInCart={product.idInCart} />
+                        return <Product key={product.idInCart} id={product.id} s={product.size} idInCart={product.idInCart} />
                     })}
                 </Products>
                 <Info>
