@@ -1,6 +1,6 @@
 <h1>DWIT</h1>
 
-<h2>About this proyect</h2>
+<h2>About this project</h2>
 
 <p>DWIT is an e-commerce app built entirely by <a href="https://gabriel-vargas-cf193.web.app/" >Gabriel Vargas</a>, as a project to practice and improve his ReactJs skills.</p>
 </hr>
