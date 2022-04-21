@@ -6,10 +6,9 @@ import {
     CloseBtn,
     Table
 } from './styles'
-import ModalContext from '../../../context/modalState/Context'
+// import ModalContext from '../../../context/modalState/Context'
 
-const SizeGuide = () => {
-    const { closeModal } = useContext(ModalContext)
+const SizeGuide = ({close: closeModal}) => {
 
     return (
         <Container>

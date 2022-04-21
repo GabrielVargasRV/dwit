@@ -1,13 +1,4 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-
-
-export const Heart = styled.i`
-    display: block;
-    cursor: pointer;
-    font-size: 18px;
-    color: ${(props) => props.isLiked ? '#F70707' : '#FFFFFF'};
-`
 
 export const Container = styled.div`
     width: 100%;
@@ -17,38 +8,31 @@ export const Container = styled.div`
     grid-template-columns: 100%;
     margin-top: 20px;
     text-decoration: none;
-    /* border: 1px solid #c1c1c1; */
     border-radius: 5px;
     transition: all 0.2s;
     border: 1px solid rgba(0,0,0,.1);
 
-    &:hover ${Heart}{
-        display: block;
-    }
-
     &:hover{
         position: relative;
-        transform: scale(1.12);
-        box-shadow: 0px 0px 80px -20px rgba(130,130,130,0.75);
         z-index: 5;
+        transform: scale(1.05);
     }
     @media (max-width: 720px){
         height: 400px;
 
         &:hover{
-            transform: scale(1);
+            transform: scale(1.05);
         }
     }
 `
 
-export const Image = styled(Link)`
+export const Image = styled.div`
     width: 100%;
     height: 100%;
     background-image: ${(props) => `url(${props.bg})`};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    cursor: pointer;
     border-radius: 5px 5px 0px 0px;
 `
 
@@ -63,8 +47,6 @@ export const Info = styled.div`
     color: #fff;
     border-radius: 0px 0px 5px 5px;
     border: 1px solid #000000;
-    /* box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75); */
-
 `
 
 export const InfoTop = styled.div`
@@ -73,14 +55,10 @@ export const InfoTop = styled.div`
     align-items: flex-start;
 `
 
-export const Title = styled(Link)`
+export const Title = styled.p`
     font-size:18px;
-    cursor: pointer;
     color: #ffffff;
     text-decoration: none;
-    &:hover{
-        text-decoration: underline;
-    }
 `
 
 export const Price = styled.p`

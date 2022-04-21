@@ -17,16 +17,16 @@ export const Products = styled.div`
 
     @media (max-width: 970px) {
         width: 100%;
-        padding: 0 10px;
+        padding: 0 20px;
         grid-template-columns: repeat(3,1fr);
     }
 
     @media (max-width: 740px) {
-        padding: 0 10px;
+        padding: 0 20px;
         grid-template-columns: repeat(2,1fr);
     }
     @media (max-width: 530px) {
-        padding: 0 10px;
+        padding: 0 20px;
         grid-template-columns: repeat(1,1fr);
     }
 `
