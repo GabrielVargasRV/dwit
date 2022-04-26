@@ -8,7 +8,6 @@ export const Heart = styled.i`
     background-color: #fff;
     padding: 5px;
     border-radius: 5px;
-    /* border: 1px solid #fff; */
     color: ${(props) => props.isLiked ? '#F70707' : '#000'};
 `
 
@@ -43,4 +42,11 @@ export const Content = styled.div`
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-gap: 10px;
+
+
+    @media (max-width: 620px) {
+        grid-template-columns: 100%;
+        grid-template-rows: 60% 40%;
+    }
+
 `

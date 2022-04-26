@@ -1,19 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react'
-import {
-    Container,
-    Products
-} from './stylesComponents'
-import Product from '../../components/product/index'
-import { useParams } from 'react-router-dom'
-import { useGetProductsByCategory } from '../../hooks/useGetProductsByCategory'
-import LoadingPage from '../loading/index'
-import CartContext from '../../context/cartState/Context'
+import React, { useEffect, useState } from 'react'
+import { Container, Products as ProductsComp } from './stylesComponents'
+import Product from '../../components/product/index';
+import { useParams } from 'react-router-dom';
+import Products from "../../services/products.services";
+import LoadingPage from '../loading/index';
 import styles from "./styles.module.css"
 import ProductModal from "../../components/modals/product";
 import {motion,AnimatePresence} from 'framer-motion';
+import { connect } from "react-redux";
 
-const Home = () => {
-    const {favorites,cartLoading} = useContext(CartContext)
+const Home = ({favorites,cartLoading}) => {
     const [selectedCard,setSelectedCard] = useState(null);
     const { category } = useParams()
     const [items, setItems] = useState([])
@@ -21,9 +17,9 @@ const Home = () => {
 
     useEffect(() => {
         if(!cartLoading){
-            useGetProductsByCategory(category, (res) => {
+            Products.getByCategory(category, (res) => {
                 if(res.length){
-                    const array = res.map((product,index) => {
+                    const array = res.map((product) => {
                         let isLiked = false;
                         if(favorites.includes(product.id)) isLiked = true;
                         return {...product,isLiked};
@@ -39,13 +35,13 @@ const Home = () => {
 
     return (
         <Container>
-            <Products>
+            <ProductsComp>
                 {items.length > 0 && items.map((item) => (
                     <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} layoutId={item.id} key={item.id} onClick={() => setSelectedCard({id:item.id,data:item})}>
                         <Product data={item} ></Product>
                     </motion.div>
                 ))}
-            </Products>
+            </ProductsComp>
 
             <AnimatePresence>
                 {selectedCard && (
@@ -58,4 +54,11 @@ const Home = () => {
     )
 }
 
-export default Home
+const mapStateToProps = (state) => ({
+    favorites: state.favorites,
+    cartLoading: state.cartLoading,
+});
+
+const mapDispatcoToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps,mapDispatcoToProps)(Home);

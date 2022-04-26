@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     Container,
     Content,
     Header,
     CloseBtn,
     Table
-} from './styles'
-// import ModalContext from '../../../context/modalState/Context'
+} from './styles';
 
 const SizeGuide = ({close: closeModal}) => {
 

@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     Container,
     Content,
     Products,
     Info,
     ContinueBtn,
-} from './styles'
-import CartContext from '../../context/cartState/Context';
+} from './styles';
 import Product from '../../components/checkoutItem/index';
 import EmptyCart from '../emptyCart/index'
 import OrderSummary from '../../components/orderSummary/index'
+import { connect } from "react-redux";
 
-const Checkout = () => {
-    const { cart } = useContext(CartContext)
+const Checkout = ({cart}) => {
 
     if(!cart.length) return <EmptyCart/>
 
@@ -33,5 +32,10 @@ const Checkout = () => {
     )
 }
 
+const mapStateToProps = (state) => ({
+    cart: state.cart
+});
 
-export default Checkout
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Checkout);

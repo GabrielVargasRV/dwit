@@ -122,3 +122,11 @@
 .size_btn_active > p > span{
     color: #fff;
 }
+
+@media (max-width: 620px){
+    .container{
+        width: 100%;
+        height: 100vh;
+        border-radius: 0px;
+    }
+}

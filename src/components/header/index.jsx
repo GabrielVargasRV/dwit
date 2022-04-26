@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
     Container,
     InputContainer,
@@ -13,24 +13,24 @@ import {
     HeartIcon,
     UserIcon
 } from './styles'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import CartContext from '../../context/cartState/Context'
-import { useGetProductByTitle } from '../../hooks/useGetProductByTitle'
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Cart from "../../services/cart.services";
+import Products from "../../services/products.services";
+import { connect } from "react-redux";
 
-const Header = () => {
+const Header = ({cart}) => {
     const location = useLocation();
-    const navigate = useNavigate()
-    const { cart } = useContext(CartContext)
-    const [search, setSearch] = useState('')
-    const [searchData, setSearchData] = useState([])
-    const [inputFocus, setInputFocus] = useState(false)
+    const navigate = useNavigate();
+    const [search, setSearch] = useState('');
+    const [searchData, setSearchData] = useState([]);
+    const [inputFocus, setInputFocus] = useState(false);
 
     const handleOnChange = (e) => {
         if (e.target.value.length > 0) setInputFocus(true)
         setSearch(e.target.value)
-        useGetProductByTitle(e.target.value, (res) => {
+        Products.getByTitle(e.target.value,(res) => {
             setSearchData(res)
-        })
+        });
     }
 
     return (
@@ -90,4 +90,11 @@ const Header = () => {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => ({
+    cart: state.cart
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

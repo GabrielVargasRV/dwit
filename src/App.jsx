@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   BrowserRouter,
   Routes,
   Route
-} from 'react-router-dom'
-import Loading from './pages/loading/index'
+} from 'react-router-dom';
+import Loading from './pages/loading/index';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import Header from './components/header/index'
-import ModalContainer from './components/modalContainer/index'
-import ModalContext from './context/modalState/Context'
-import UserContext from './context/userState/Context'
+import Header from './components/header/index';
+import ModalContainer from './components/modalContainer/index';
+
+import { connect } from "react-redux";
+
+
 const Home = React.lazy(() => import('./pages/home'))
 const Product = React.lazy(() => import('./pages/product/index'))
 const Checkout = React.lazy(() => import('./pages/checkout/index'))
@@ -23,9 +25,7 @@ const Admin = React.lazy(() => import('./pages/admin/index'))
 const Favorites = React.lazy(() => import('./pages/favorites/index'))
 
 
-const App = () => {
-  const { isLogged } = useContext(UserContext)
-  const { modal } = useContext(ModalContext)
+const App = ({isLogged,modal}) => {
 
   return (
     <BrowserRouter>
@@ -97,4 +97,11 @@ const App = () => {
   )
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLogged: state.isLogged,
+  modal: state.modal
+})
+
+const mapDispatchToProps = (dispatch) => ({})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

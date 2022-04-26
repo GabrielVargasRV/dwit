@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     Container,
     SigninBox,
@@ -7,15 +7,14 @@ import {
     SigninWithEmailInput,
     SigninWithEmailBtn,
     SigninWithEmailRegisterBtn
-} from './styles'
-import UserContext from '../../context/userState/Context'
+} from './styles';
+import UserServices from "../../services/user.services";
 
 
 const Signin = () => {
-    const { signinWithGoogle, signinWithEmailAndPassword} = useContext(UserContext)
 
     const handleSigninWithGoogle = async () => {
-        await signinWithGoogle()
+        await UserServices.signInWithGoogle()
         return
     };
 
@@ -23,7 +22,7 @@ const Signin = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        await signinWithEmailAndPassword(email,password)
+        await UserServices.signInWithEmailAndPassword(email,password)
         return
     }
 

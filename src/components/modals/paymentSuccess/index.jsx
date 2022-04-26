@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     Container,
     Top,
     Center,
     CloseBtn
-} from './styles'
-import ModalContext from '../../../context/modalState/Context'
+} from './styles';
 
-const PaymentSuccess = () => {
-    const { closeModal } = useContext(ModalContext)
+const PaymentSuccess = ({close}) => {
 
     const handleClose = () => {
-        closeModal()
+        close()
     }
 
 
@@ -25,7 +23,6 @@ const PaymentSuccess = () => {
             <Center>
                 <i className="fas fa-check-circle"></i>
                 <h3>Thanks for your purchase!</h3>
-                {/* <p>See all your orders at <Strong >Account</Strong></p> */}
             </Center>
         </Container>
     )

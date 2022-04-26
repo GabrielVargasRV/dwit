@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
     SignupBox,
     Form,
@@ -8,14 +8,11 @@ import {
     CloseBtn,
     Top,
     AlreadyHaveAnAccountBtn
-} from './styles'
-import UserContext from '../../../context/userState/Context'
-import ModalContext from '../../../context/modalState/Context'
-import SigninModal from '../signin/index'
+} from './styles';
+import UserServices from "../../../services/user.services";
+import SigninModal from '../signin/index';
 
-const Signup = () => {
-    const { createUserWithEmailAndPassword } = useContext(UserContext)
-    const {setModal,closeModal} = useContext(ModalContext)
+const Signup = ({close,setModal}) => {
     const [viewPassword, setViewPassword] = useState(false)
 
     const handleOnSubmit = async (e) => {
@@ -23,10 +20,10 @@ const Signup = () => {
         const email = e.target.email.value
         const password = e.target.password.value
         const name = e.target.name.value
-        await createUserWithEmailAndPassword(email, password, name)
+        await UserServices.createUserWithEmailAndPassword(email, password, name)
         .then((res) => {
-            closeModal()
-        })
+            close();
+        });
     }
 
     return (
@@ -48,7 +45,7 @@ const Signup = () => {
                 </Password>
                 <SubmitBtn type="submit" >register</SubmitBtn>
             </Form>
-            <AlreadyHaveAnAccountBtn onClick={() => setModal(<SigninModal/>)} >Already hava a account ? <strong>sign in</strong></AlreadyHaveAnAccountBtn>
+            <AlreadyHaveAnAccountBtn onClick={() => setModal(<SigninModal close={close} setModal={setModal} />)} >Already hava a account ? <strong>sign in</strong></AlreadyHaveAnAccountBtn>
         </SignupBox>
     )
 }

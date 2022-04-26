@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import {
     Container,
     Content,
@@ -6,22 +6,21 @@ import {
     Info,
     ContinueBtn,
     GoBackBtn
-} from './styles'
-import CartContext from '../../context/cartState/Context'
-import UserContext from '../../context/userState/Context'
-import ModalContext from '../../context/modalState/Context'
-import {useNavigate} from 'react-router-dom'
-import SigninModal from '../../components/modals/signin/index'
+} from './styled-components';
+import styles from "./styles.module.css";
+import Payment from "../../services/payment.services";
+import {useNavigate} from 'react-router-dom';
+import SigninModal from '../../components/modals/signin/index';
+import { connect } from "react-redux";
 
-const Information = () => {
-    const {cartFullInfo,subTotal,setBuyer} = useContext(CartContext)
-    const {isLogged} = useContext(UserContext)
-    const {setModal} = useContext(ModalContext)
-    const navigate = useNavigate()
+const Information = ({cartFullInfo,subTotal,isLogged}) => {
+    const [modal,setModal] = useState(false);
+    const navigate = useNavigate();
+
 
     const handleOnSubmit = (e) => {
-        e.preventDefault()
-        setBuyer({
+        e.preventDefault();
+        Payment.setBuyer({
             email:e.target.email.value,
             address:e.target.address.value,
             apto:e.target.apto.value,
@@ -30,9 +29,11 @@ const Information = () => {
             state: e.target.state.value,
             cp: e.target.cp.value,
             phone: e.target.phone.value
-        })
-        if(!isLogged) return setModal(<SigninModal/>)
-        navigate('/checkout/payment')
+        });
+        if(!isLogged) setModal(<SigninModal/>)
+        else{
+            navigate('/checkout/payment')
+        }
     }
 
     useEffect(() => {
@@ -65,8 +66,22 @@ const Information = () => {
                     <GoBackBtn to="/checkout" >Go Back</GoBackBtn>
                 </Info>
             </Content>
+
+            {modal && (
+                <div className={styles.modal}>
+                    <SigninModal close={() => setModal(null)} setModal={setModal} />
+                </div>
+            )}
         </Container>
     )
 }
 
-export default Information
+const mapDispatchToProps = (dispatch) => ({});
+
+const mapStateToProps = (state) => ({
+    cartFullInfo: state.cartFullInfo,
+    subTotal: state.subTotal,
+    isLogged: state.isLogged
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Information);

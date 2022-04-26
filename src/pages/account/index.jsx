@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React,{useEffect} from 'react';
 import {
     Container,
     Content,
@@ -11,15 +11,18 @@ import {
     AvaliableMoney,
     ProfileContainer
 } from './styles'
-import UserContext from '../../context/userState/Context'
-import CartContext from '../../context/cartState/Context'
+import { connect } from "react-redux";
+import UserServices from "../../services/user.services";
+import PaymentServices from "../../services/payment.services";
 import { useNavigate } from 'react-router-dom'
 import OrderItem from '../../components/orderItem/index'
 
-const Account = () => {
-    const navigate = useNavigate()
-    const { user, logout } = useContext(UserContext)
-    const { orders } = useContext(CartContext)
+const Account = ({user,orders}) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        PaymentServices.getOrders(user.uid);
+    },[]);
 
     return (
         <Container>
@@ -44,7 +47,7 @@ const Account = () => {
                             <p>Available</p>
                             <h3>${user.money} USD</h3>
                         </AvaliableMoney>
-                        <SignoutBtn onClick={() => logout()} >Sign out</SignoutBtn>
+                        <SignoutBtn onClick={() => UserServices.signOut()} >Sign out</SignoutBtn>
                         {user.isAdmin ? (<AdminBtn onClick={() => navigate('/admin')} >Admin</AdminBtn>) : (<></>)}
                     </Profile>
                 </ProfileContainer>
@@ -53,4 +56,11 @@ const Account = () => {
     )
 }
 
-export default Account
+const mapStateToProps = (state) => ({
+    user: state.user,
+    orders: state.orders,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Account);

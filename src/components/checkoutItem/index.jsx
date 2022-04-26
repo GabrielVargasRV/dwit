@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Container,
     Photo,
@@ -23,12 +23,12 @@ import {
     BottomLoading
 } from './loadingStyles'
 
-import { useGetProductById } from '../../hooks/useGetProductById';
-import CartContext from '../../context/cartState/Context'
+import Products from "../../services/products.services";
+import Cart from "../../services/cart.services";
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'
-import Notification from '../notification/index'
-import LoadingSpinner from '../loadingSpinner/index'
+import { toast } from 'react-toastify';
+import Notification from '../notification/index';
+import LoadingSpinner from '../loadingSpinner/index';
 
 const Loading = () => {
 
@@ -52,15 +52,14 @@ const Loading = () => {
 
 
 const CheckoutItem = (props) => {
-    const navigate = useNavigate()
-    const [data, setData] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [removing, setRemoving] = useState(false)
-    const { removeProductFromCart } = useContext(CartContext)
+    const navigate = useNavigate();
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [removing, setRemoving] = useState(false);
 
     const handleRemoveProductFromCart = () => {
         setRemoving(true)
-        removeProductFromCart(props.idInCart,(res) => {
+        Cart.removeFromCart(props.idInCart,(res) => {
             toast(<Notification ImgUrl={data.image} text="Remove from cart" theme="#ff0000" />, {
                 hideProgressBar: true,
                 autoClose: 3000,
@@ -71,7 +70,7 @@ const CheckoutItem = (props) => {
     }
 
     useEffect(() => {
-        useGetProductById(props.id, (res) => {
+        Products.getById(props.id, (res) => {
             if (res) {
                 let price = res.sizes.filter(e => e.size === props.s)[0]
                 setData({
@@ -80,7 +79,7 @@ const CheckoutItem = (props) => {
                 })
                 setLoading(false)
             }
-        })
+        });
         return () => setLoading(false)
     }, [])
 

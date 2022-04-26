@@ -1,21 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 600px;
-    height: 400px;
+    width: 500px;
+    height: 300px;
     display: grid;
     grid-template-rows: 40px auto 40px;
     background-color: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
+    border-radius: 10px;
     border: 1px solid #ececec;
-    @media (max-width: 410px){
-        width: 340px;
+    @media (max-width: 510px){
+        width: 100%;
     }
-    @media (max-width: 350px){
-        width: 310px;
-    }
-
 `
 
 export const Content = styled.div`
@@ -26,12 +21,12 @@ export const Content = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-    height: 40px;
+    height: 60px;
     display: flex;
     align-items: end;
     justify-content: space-between;
     border-bottom: 1px solid #ececec;
-    padding-bottom:3px;
+    padding: 10px;
 `
 
 export const CloseBtn = styled.button`
@@ -51,18 +46,22 @@ export const CloseBtn = styled.button`
 `
 
 export const Table = styled.table`
-    width: 500px;
+    width: 100%;
     height: 200px;
     text-align: center;
     font-size: 18px;
     margin-top: 20px;
     border-radius: 3px;
     border-collapse: collapse;
-    /* border: 1px solid #ececec; */
 
     
     & th,td{
-        border: 2px solid #ececec;
+    }
+
+    @media (max-width: 500px){
+        &th,td{
+            font-size: 14px;
+        }
     }
 
 `

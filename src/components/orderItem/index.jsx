@@ -10,12 +10,12 @@ import {
     Status,
     TimeFromNow
 } from './styles'
-import CartContext from '../../context/cartState/Context'
+import PaymentServices from "../../services/payment.services";
 import moment from 'moment'
 
 const OrderItem = ({ data }) => {
     const [productIndex, setProductIndex] = useState(0)
-    const { cancelOrder } = useContext(CartContext)
+    // const { cancelOrder } = useContext(CartContext)
     const [dateAgo,setDateAgo] = useState('')
     
     useEffect(() => {
@@ -55,7 +55,7 @@ const OrderItem = ({ data }) => {
                 {data.status !== 'delivered' ? (
                     <ButtonsContainer>
                         {data.status !== 'canceled' ? (
-                            <CancelBtn onClick={() => cancelOrder(data.id)} >Cancel Order</CancelBtn>
+                            <CancelBtn onClick={() => PaymentServices.cancelOrder(data.id)} >Cancel Order</CancelBtn>
                         ) : (<></>)}
                     </ButtonsContainer>
                 ) : (<></>)}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     SigninBox,
     SigninWithGoogleBtn,
@@ -8,18 +8,14 @@ import {
     SigninWithEmailRegisterBtn,
     Top,
     CloseBtn
-} from './styles'
-import UserContext from '../../../context/userState/Context'
-import ModalContext from '../../../context/modalState/Context'
-import SignupModal from '../signup/index'
+} from './styles';
+import UserServices from "../../../services/user.services";
+import SignupModal from '../signup/index';
 
-const Signin = () => {
-    const { signinWithGoogle, signinWithEmailAndPassword} = useContext(UserContext)
-    const {closeModal,setModal} = useContext(ModalContext)
-
+const Signin = ({close,setModal}) => {
     const handleSigninWithGoogle = async () => {
-        await signinWithGoogle()
-        closeModal()
+        await UserServices.signInWithGoogle()
+        close()
         return
     };
 
@@ -27,8 +23,8 @@ const Signin = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        await signinWithEmailAndPassword(email,password)
-        closeModal()
+        await UserServices.signInWithEmailAndPassword(email,password);
+        close()
         return
     }
 
@@ -36,7 +32,7 @@ const Signin = () => {
         <SigninBox>
             <Top>
                 <h2>Sign in</h2>
-                <CloseBtn onClick={() => closeModal()} >
+                <CloseBtn onClick={() => close()} >
                     <i className="fas fa-times"></i>
                 </CloseBtn>
             </Top>
@@ -48,10 +44,10 @@ const Signin = () => {
                 <SigninWithEmailInput type="email" placeholder="Email" name="email" required />
                 <SigninWithEmailInput type="password" placeholder="Password" name="password" required />
                 <SigninWithEmailBtn type="submit" >Sign in</SigninWithEmailBtn>
-                <SigninWithEmailRegisterBtn onClick={() => setModal(<SignupModal/>)} >Don't have an account? <strong> register</strong></SigninWithEmailRegisterBtn>
+                <SigninWithEmailRegisterBtn onClick={() => setModal(<SignupModal close={close} setModal={setModal} />)} >Don't have an account? <strong> register</strong></SigninWithEmailRegisterBtn>
             </SigninWithEmail>
         </SigninBox>
     )
 }
 
-export default Signin
+export default Signin;

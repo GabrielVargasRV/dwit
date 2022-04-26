@@ -86,6 +86,7 @@ export const AlreadyHaveAnAccountBtn = styled.button`
     width: 100%;
     height: 40px;
     display: flex;
+    font-size: 16px;
     align-items: center;
     justify-content: center;
     background-color: transparent;

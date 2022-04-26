@@ -15,13 +15,13 @@ export const Container = styled.div`
     &:hover{
         position: relative;
         z-index: 5;
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
     @media (max-width: 720px){
         height: 400px;
 
         &:hover{
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
     }
 `
@@ -47,6 +47,7 @@ export const Info = styled.div`
     color: #fff;
     border-radius: 0px 0px 5px 5px;
     border: 1px solid #000000;
+    text-decoration: none;
 `
 
 export const InfoTop = styled.div`
@@ -63,4 +64,5 @@ export const Title = styled.p`
 
 export const Price = styled.p`
     color: #c1c1c1;
+    text-decoration: none;
 `

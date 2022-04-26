@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import {
     Container,
     Content,
@@ -7,28 +7,24 @@ import {
     GoBackBtn,
     PaymentButton,
     Warning
-} from './styles'
-import CartContext from '../../context/cartState/Context'
-import ModalContext from '../../context/modalState/Context'
-import UserContext from '../../context/userState/Context'
+} from './styled-components';
+import styles from "./styles.module.css";
+import PaymentServices from "../../services/payment.services";
 import Product from '../../components/checkoutItem/index'
 import { useNavigate } from 'react-router-dom';
 import PaymentSuccess from '../../components/modals/paymentSuccess/index'
 import {toast} from 'react-toastify'
-import LoadingSpinner from '../../components/loadingSpinner/index'
+import LoadingSpinner from '../../components/loadingSpinner/index';
+import { connect } from "react-redux";
 
-const Payment = () => {
-    const navigate = useNavigate()
-    const { cart, cartFullInfo, subTotal, buyer,addNewOrder,clearCart,payment } = useContext(CartContext)
-    const {setModal} = useContext(ModalContext)
-    const {isLogged} = useContext(UserContext)
+const Payment = ({cart,cartFullInfo,buyer,subTotal,isLogged,user}) => {
+    const navigate = useNavigate();
+    const [modal,setModal] = useState(null);
     const [loadingPayment,setLoadingPayment] = useState(false);
 
     const handleSuccess = (success) => {
         try{
-            setLoadingPayment(false)
-            addNewOrder(cartFullInfo,subTotal)
-            clearCart()
+            setLoadingPayment(false);
             setModal(<PaymentSuccess/>)
             navigate('/account')
         }catch(e){
@@ -43,15 +39,15 @@ const Payment = () => {
 
     const handlePayment = async () => {
         setLoadingPayment(true)
-        payment()
+        PaymentServices.pay(user,subTotal,cartFullInfo)
         .then((success) => handleSuccess(success))
-        .catch((error) => handleError(error))
+        .catch((error) => handleError(error));
     }
 
 
     useEffect(() => {
-        if (!buyer && cartFullInfo.length > 0) navigate('/checkout/information')
-        if (!isLogged) navigate('/account')
+        if (!buyer && cartFullInfo.length > 0) navigate('/checkout/information');
+        if (!isLogged) navigate('/account');
     }, [])
 
     return (
@@ -79,9 +75,28 @@ const Payment = () => {
                     <GoBackBtn to="/checkout/information" >Go Back</GoBackBtn>
                 </Info>
             </Content>
+
+            {modal && (
+                <div className={styles.modal}>
+                    <PaymentSuccess close={() => setModal(null)} setModal={setModal} />
+                </div>
+            )}
+
         </Container>
     )
 }
 
 
-export default Payment;
+const mapStateToProps = (state) => ({
+    cart: state.cart,
+    cartFullInfo: state.cartFullInfo,
+    subTotal: state.subTotal,
+    buyer: state.buyer,
+    isLogged: state.isLogged, 
+    user: state.user
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Payment);

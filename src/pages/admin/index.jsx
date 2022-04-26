@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext,useRef } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import {
     Container,
     Content,
@@ -11,16 +11,16 @@ import {
     Sizes,
     AddSize,
     SaveBtn
-} from './styles'
-import UserContext from '../../context/userState/Context'
-import { useNavigate, useParams } from 'react-router-dom'
-import { db } from '../../firebase/index'
-import ProductItem from './ProductItem.jsx'
-import {useGetProductById} from '../../hooks/useGetProductById'
+} from './styles';
+import { useNavigate, useParams } from 'react-router-dom';
+import { db } from '../../firebase/index';
+import ProductItem from './ProductItem.jsx';
+import ProductsServices from "../../services/products.services";
+import { connect } from 'react-redux';
 
 let unSub = null
 
-const Admin = () => {
+const Admin = ({user}) => {
     const productInitialState = {
         image: '',
         title: '',
@@ -28,24 +28,23 @@ const Admin = () => {
         category: [],
         sizes: []
     }
-    const navigate = useNavigate()
-    const { id } = useParams()
-    const { user } = useContext(UserContext)
-    const [products, setProducts] = useState([])
-    const [product, setProduct] = useState(productInitialState)
-    const [categoryText, setCategoryText] = useState('')
-    const formRef = useRef(null)
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState(productInitialState);
+    const [categoryText, setCategoryText] = useState('');
+    const formRef = useRef(null);
     const [sizeData, setSizeData] = useState({
         size: '',
         price: 0
-    })
+    });
 
     const handleOnChange = (e) => {
         const value = e.target.value
         setProduct({
             ...product,
             [e.target.name]: value
-        })
+        });
         console.log(product)
     }
 
@@ -54,8 +53,8 @@ const Admin = () => {
         setProduct({
             ...product,
             category: categories
-        })
-        setCategoryText('')
+        });
+        setCategoryText('');
     }
 
     const deleteFromCategory = (index) => {
@@ -64,7 +63,7 @@ const Admin = () => {
         setProduct({
             ...product,
             category: categories
-        })
+        });
     }
 
     const addSize = () => {
@@ -72,11 +71,11 @@ const Admin = () => {
         setProduct({
             ...product,
             sizes: sizes
-        })
+        });
         setSizeData({
             size: '',
             price: 0
-        })
+        });
     }
 
     const deleteSize = (index) => {
@@ -85,35 +84,35 @@ const Admin = () => {
         setProduct({
             ...product,
             sizes: sizes
-        })
+        });
     }
 
 
     const addProduct = async () => {
         if(!id){
-            await db.collection('items').add(product)
-            setProduct(productInitialState)
+            await db.collection('items').add(product);
+            setProduct(productInitialState);
         }else{
-            await db.collection('items').doc(id).set(product)
-            setProduct(productInitialState)
-            navigate('/admin')
+            await db.collection('items').doc(id).set(product);
+            setProduct(productInitialState);
+            navigate('/admin');
         }
     }
 
     useEffect(() => {
         if(formRef.current){
-            formRef.current.scrollIntoView({behavior: 'smooth'})  
+            formRef.current.scrollIntoView({behavior: 'smooth'});
         }
 
         if (!user || !user.isAdmin) navigate('/account')
         else {
             if(id){
-                useGetProductById(id,(res) => setProduct({...res}))
+                ProductsServices.getById(id,(res) => setProduct({...res}));
             }
             unSub = db.collection('items').onSnapshot((snapshot) => {
                 const arr = []
-                snapshot.docs.forEach((doc) => arr.push({id:doc.id,...doc.data()}))
-                setProducts([...arr])
+                snapshot.docs.forEach((doc) => arr.push({id:doc.id,...doc.data()}));
+                setProducts([...arr]);
             })
         }
         return () => unSub && unSub()
@@ -183,4 +182,10 @@ const Admin = () => {
     )
 }
 
-export default Admin
+const mapStateToProps = (state) => ({
+    user: state.user
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Admin);

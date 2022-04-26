@@ -1,11 +1,17 @@
-import React,{useContext} from 'react';
+import React, {useEffect,useState} from 'react';
 import {
     Container,
-} from './styles'
-import CartContext from '../../context/cartState/Context'
+} from './styles';
+import { connect } from "react-redux";
 
-const OrderSummary = () => {
-    const {cartFullInfo,subTotal} = useContext(CartContext)
+const OrderSummary = ({cartFullInfo}) => {
+    const [subTotal,setSubTotal] = useState(0);
+
+    useEffect(() => {
+        let sum = 0;
+        cartFullInfo.forEach((i) => sum+=i.price);
+        setSubTotal(sum);
+    },[cartFullInfo])
 
     return (
         <Container>
@@ -21,5 +27,11 @@ const OrderSummary = () => {
     )
 }
 
+const mapDispatchToProps = (dispatch) => ({});
 
-export default OrderSummary;
+const mapStateToProps = (state) => ({
+    cartFullInfo: state.cartFullInfo
+});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(OrderSummary);

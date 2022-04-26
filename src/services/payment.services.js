@@ -1,4 +1,7 @@
 import {db} from '../firebase/index';
+import Cart from "./cart.services";
+import UserServices from "./user.services";
+import store from "../redux/store";
 
 class Payment {
 
@@ -8,10 +11,11 @@ class Payment {
 
     setBuyer(buyer){
         this.buyer = buyer;
+        store.dispatch({type:"SET_BUYER",content: buyer});
     }
 
-    async addNewOrder(product, total, user){
-        if(!product || !total || !user) return null;
+    async addNewOrder(products, total, user){
+        if(!products || !total || !user) return null;
         const buyer = this.buyer;
         const date = Date.now();
         const res = await db.collection('orders').add({
@@ -21,11 +25,13 @@ class Payment {
                 name: user.name
             },
             uid: user.uid,
-            cart: product,
+            cart: products,
             total: total,
             status: 'processing purchase',
             date: date
         });
+
+        UserServices.update();
 
         return res.id;
     }
@@ -40,12 +46,14 @@ class Payment {
             orders.push({id: order.id, ...order.data()});
         })
 
+        store.dispatch({type: "SET_ORDERS",content: orders});
+
         if(callback) callback(orders);
         return orders;
     }
 
     async cancelOrder(orderID, callback) {
-        if(!orderID) return null;
+        if(!orderID || !store.getState().user) return null;
 
         let isDelivered = false;
 
@@ -59,27 +67,38 @@ class Payment {
             await db.collection('orders').doc(orderID).update({ status: 'canceled' });
         }
 
-        if (callback) callback();
-        return
+        //get orders
+        let newOrders = await this.getOrders(store.getState().user.uid);
+        store.dispatch({type:"SET_ODERS",content: newOrders});
+
+        if (callback) callback(newOrders);
+        return newOrders;
     }
 
 
-    async pay(user,amount,product,callback){
-        const availableMoney = parseFloat(user.money);
+    async pay(user,amount,products,callback){
+        let res = null;
 
-        if(amount > availableMoney) throw new Error({
-            errorCode: 'invalid amount',
-            message: `You don't have enough money for this purchase.`
-        })
-
-        let newMoney = user.money - amount;
-        await db.collection('users').doc(user.uid).update({ money: newMoney });
-        await user.updateUser();
-        await this.addNewOrder(product,amount);
-        const res = 'SUCCESS';
-        if (callback) return callback(res);
+        try{
+            const availableMoney = parseFloat(user.money);
+    
+            if(amount > availableMoney) throw new Error({
+                errorCode: 'invalid amount',
+                message: `You don't have enough money for this purchase.`
+            })
+    
+            let newMoney = user.money - amount;
+            await db.collection('users').doc(user.uid).update({ money: newMoney });
+            await this.addNewOrder(products,amount,user);
+            await Cart.clearCart();
+            res = 'SUCCESS';
+        }catch(error){
+            res = null;
+        }
+        if (callback) callback(res);
         return res;
     }
 }
 
-export default Payment;
+const payment = new Payment();
+export default payment;

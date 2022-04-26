@@ -16,4 +16,4 @@ const Notification = ({ImgUrl,text,theme = '#ffffff'}) => {
     )
 }
 
-export default Notification
+export default Notification;
