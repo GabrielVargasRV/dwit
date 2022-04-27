@@ -181,3 +181,14 @@ export const SizeGuide = styled.button`
         background: transparent;
     }
 `
+
+export const ShareBtn = styled.button`
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #cacaca;
+    margin-left: 5px;
+    border-style: none;
+    color: #7f7f7f;
+    cursor: pointer;
+`

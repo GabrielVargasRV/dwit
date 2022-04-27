@@ -4,13 +4,9 @@ import Product from '../../components/product/index';
 import { useParams } from 'react-router-dom';
 import Products from "../../services/products.services";
 import LoadingPage from '../loading/index';
-import styles from "./styles.module.css"
-import ProductModal from "../../components/modals/product";
-import {motion,AnimatePresence} from 'framer-motion';
 import { connect } from "react-redux";
 
 const Home = ({favorites,cartLoading}) => {
-    const [selectedCard,setSelectedCard] = useState(null);
     const { category } = useParams()
     const [items, setItems] = useState([])
     const [loading,setLoading] = useState(true)
@@ -37,19 +33,9 @@ const Home = ({favorites,cartLoading}) => {
         <Container>
             <ProductsComp>
                 {items.length > 0 && items.map((item) => (
-                    <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} layoutId={item.id} key={item.id} onClick={() => setSelectedCard({id:item.id,data:item})}>
-                        <Product data={item} ></Product>
-                    </motion.div>
+                        <Product key={item.id} data={item} ></Product>
                 ))}
             </ProductsComp>
-
-            <AnimatePresence>
-                {selectedCard && (
-                    <motion.div className={styles.modal_container} >
-                        <ProductModal id={selectedCard.id} data={selectedCard.data} close={() => setSelectedCard(null)} />
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </Container>
     )
 }

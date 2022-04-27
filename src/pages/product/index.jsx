@@ -14,14 +14,12 @@ import {
     Price,
     RelatedProducts,
     Heart,
-    SizeGuide
+    SizeGuide,
+    ShareBtn
 } from './styled-components'
-import { useParams,Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styles from "./styles.module.css";
-// import { useGetProductById } from '../../hooks/useGetProductById'
-// import { useGetProductsByCategory } from '../../hooks/useGetProductsByCategory'
 import ReletedProduct from '../../components/product/index';
-// import CartContext from '../../context/cartState/Context';
 import CartServices from "../../services/cart.services";
 import ProductsServices from "../../services/products.services";
 import LoadingPage from '../loading/index'
@@ -30,10 +28,11 @@ import Notification from '../../components/notification/index'
 import LoadingSpinner from '../../components/loadingSpinner/index'
 import SizeGuideModal from '../../components/modals/sizeGuide/index';
 import { connect } from "react-redux";
-// import ModalContext from '../../context/modalState/Context'
+import useShare from "../../hooks/useShare";
 
 
 const Product = ({favorites}) => {
+    const share  = useShare();
     const { id } = useParams()
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -121,6 +120,11 @@ const Product = ({favorites}) => {
                                     <p>Add To Cart</p>
                                 )}
                             </AddToCartBtn>
+                            <ShareBtn
+                                onClick={() => share(data.title,'',`https://donewithit-511d4.web.app/product/${id}`)}
+                            >
+                                <i className="fas fa-share"></i>
+                            </ShareBtn>
                         </div>
                     </Info>
                 </Center>
@@ -128,9 +132,7 @@ const Product = ({favorites}) => {
             </Content>
             <RelatedProducts>
                 {related.map(product => (
-                    <Link key={product.id} to={`/product/${product.id}`} style={{textDecoration: 'none'}} >
-                        <ReletedProduct data={product} />
-                    </Link>
+                    <ReletedProduct key={product.id} data={product} />
                 ))}
             </RelatedProducts>
 

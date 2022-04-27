@@ -11,7 +11,7 @@ import  {
 const Product = ({data}) => {
 
     return(
-        <Container >
+        <Container to={`/product/${data.id}`} >
             <Image bg={data.image} ></Image>
             <Info>
                 <InfoTop>

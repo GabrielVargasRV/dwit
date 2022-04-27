@@ -59,9 +59,7 @@ export const ContinueBtn = styled(Link)`
     font-weight: bold;
     cursor: pointer;
     margin-top: 5px;
-    /* transition: 0.2s all; */
     font-size: 16px;
-
     &:hover{
         opacity: 0.9;
     }

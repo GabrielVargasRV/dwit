@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 
-export const Container = styled.div`
+export const Container = styled(Link)`
     width: 100%;
     height: 300px;
     display: grid;
@@ -12,17 +13,8 @@ export const Container = styled.div`
     transition: all 0.2s;
     border: 1px solid rgba(0,0,0,.1);
 
-    &:hover{
-        position: relative;
-        z-index: 5;
-        transform: scale(1.1);
-    }
     @media (max-width: 720px){
         height: 400px;
-
-        &:hover{
-            transform: scale(1.1);
-        }
     }
 `
 
