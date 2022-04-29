@@ -28,10 +28,15 @@
     margin-left: 5px;
     font-size: 12px;
     font-weight: 300;
+    color: #000;
 }
 
 .current_size{
     background-color: #000000;
     color: #fff;
     border: solid 1px #101010;
+}
+
+.current_size span{
+    color: #fff;
 }
