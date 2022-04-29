@@ -88,8 +88,8 @@ const Product = ({favorites}) => {
             <Container>
                 <Helmet>
                     <title>DWIT - {data.title}</title>
-                    <meta property="og:image:url" content={`"${data.image}"`} />
-                    <meta property="og:title" content={`"DWIT - ${data.title}"`} />
+                    <meta property="og:image:url" content={data.image} />
+                    <meta property="og:title" content={data.title} />
                 </Helmet>
                 <Content>
                     <Center>
@@ -128,7 +128,7 @@ const Product = ({favorites}) => {
                                     )}
                                 </AddToCartBtn>
                                 <ShareBtn
-                                    onClick={() => share(data.title,'',`https://donewithit-511d4.web.app/product/${id}`)}
+                                    onClick={() => share(data.title,data.description,`https://donewithit-511d4.web.app/product/${id}`)}
                                 >
                                     <i className="fas fa-share"></i>
                                 </ShareBtn>
