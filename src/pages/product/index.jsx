@@ -88,7 +88,6 @@ const Product = ({favorites}) => {
             <Container>
                 <Helmet>
                     <title>DWIT - {data.title}</title>
-                    <meta property="og:image:url" content={data.image} />
                     <meta property="og:title" content={data.title} />
                 </Helmet>
                 <Content>

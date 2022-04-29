@@ -1,7 +1,5 @@
-import styled from 'styled-components'
-import { Link } from "react-router-dom";
 
-export const Container = styled(Link)`
+.container{
     width: 100%;
     height: 300px;
     display: grid;
@@ -12,23 +10,9 @@ export const Container = styled(Link)`
     border-radius: 5px;
     transition: all 0.2s;
     border: 1px solid rgba(0,0,0,.1);
+}
 
-    @media (max-width: 720px){
-        height: 400px;
-    }
-`
-
-export const Image = styled.div`
-    width: 100%;
-    height: 100%;
-    background-image: ${(props) => `url(${props.bg})`};
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-radius: 5px 5px 0px 0px;
-`
-
-export const Info = styled.div`
+.info{
     width: 100%;
     height: 100%;
     display: flex;
@@ -40,21 +24,38 @@ export const Info = styled.div`
     border-radius: 0px 0px 5px 5px;
     border: 1px solid #000000;
     text-decoration: none;
-`
+}
 
-export const InfoTop = styled.div`
+.infoTop{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-`
+}
 
-export const Title = styled.p`
+.title{
     font-size:18px;
     color: #ffffff;
     text-decoration: none;
-`
+}
 
-export const Price = styled.p`
+.price{
     color: #c1c1c1;
     text-decoration: none;
-`
+}
+
+@keyframes fadeIn{
+    from{
+        filter: blur(5px);
+        opacity: 0;
+    }
+    to{
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 720px){
+    .container{
+        height: 400px;
+    }
+}
