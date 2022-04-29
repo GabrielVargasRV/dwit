@@ -11,3 +11,27 @@
     left: 0px;
     top: 0px;
 }
+
+
+.size{
+    height: 30px;
+    width: 100%;
+    border-style: none;
+    border-radius: 5px;
+    background-color: transparent;
+    border:  solid 1px #c1c1c1;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.size span{
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.current_size{
+    background-color: #000000;
+    color: #fff;
+    border: solid 1px #101010;
+}

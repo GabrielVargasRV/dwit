@@ -106,6 +106,7 @@ export const AddToCartBtn = styled.button`
     border-radius: 5px;
     color: #ffffff;
     cursor: pointer;
+    margin: 0px;
 `
 
 export const Sizes = styled.div`

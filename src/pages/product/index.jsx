@@ -100,10 +100,10 @@ const Product = ({favorites}) => {
                             <Description>{data.description}</Description>
                             <Sizes>
                                 {data.sizes.map((size, index) => (
-                                    <Size key={index} active={activeSize === index} onClick={() => setActiveSize(index)} >
+                                    <button className={`${styles.size} ${activeSize === index && styles.current_size}`} key={index} onClick={() => setActiveSize(index)} >
                                         {size.size}
                                         <span>${size.price}</span>
-                                    </Size>
+                                    </button>
                                 ))}
                             </Sizes>
                         </InfoTop>
@@ -117,7 +117,7 @@ const Product = ({favorites}) => {
                                 {addingToCart ? (
                                     <LoadingSpinner />
                                 ) : (
-                                    <p>Add To Cart</p>
+                                    'Add To Cart'
                                 )}
                             </AddToCartBtn>
                             <ShareBtn
