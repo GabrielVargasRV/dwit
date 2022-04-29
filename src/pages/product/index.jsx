@@ -115,9 +115,10 @@ const Product = ({favorites}) => {
                             <Price>${data.sizes[activeSize].price}</Price>
                             <AddToCartBtn onClick={() => { handleAddProductToCart() }} >
                                 {addingToCart ? (
-                                    <LoadingSpinner />
+                                    // <LoadingSpinner />
+                                    'Adding...'
                                 ) : (
-                                    'Add To Cart'
+                                    'Add to cart'
                                 )}
                             </AddToCartBtn>
                             <ShareBtn
